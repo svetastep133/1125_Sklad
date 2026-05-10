@@ -18,7 +18,7 @@ public class ProductsRepository
     public List<Product> GetProducts()
     {
         List<Product> products = new List<Product>();
-        string sql = "select p.Id, p.Name, p.Unit, p.Weight, c.Name from Products p join Categories c on p.Category_id = c.Id ";
+        string sql = "select p.Id, p.Name, p.Unit, p.Weight, p.Category_id, c.Name as cName from Products p join Categories c on p.Category_id = c.Id ";
         try
         {
             connection.Open();
@@ -33,7 +33,7 @@ public class ProductsRepository
                         Name = dr.GetString("Name"),
                         Unit = dr.GetString( "Unit"),
                         Weight = dr.GetInt32( "Weight"),
-                        Categories_name = dr.GetString("Category_id")
+                        CategoriesName = dr.GetString("cName")
                      });
                     
                 }
@@ -47,5 +47,7 @@ public class ProductsRepository
         }
         return products;
     }
+
+    
     
 }

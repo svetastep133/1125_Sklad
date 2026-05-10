@@ -4,6 +4,8 @@
     <option name="projectPerEditor">
       <map>
         <entry key="1125_Sveta/Views/MainWindow.axaml" value="1125_Sveta/1125_Sveta.csproj" />
+        <entry key="1125_Sveta/Views/NewProductWindow.axaml" value="1125_Sveta/1125_Sveta.csproj" />
+        <entry key="1125_Sveta/Views/StockWindow.axaml" value="1125_Sveta/1125_Sveta.csproj" />
       </map>
     </option>
   </component>

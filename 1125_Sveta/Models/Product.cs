@@ -6,6 +6,6 @@ public class Product
     public string Name { get; set; }
     public string Unit { get; set; }
     public int Weight{ get; set; }
-   public string  Categories_name {get; set;}
+   public string  CategoriesName {get; set;}
     
 }
