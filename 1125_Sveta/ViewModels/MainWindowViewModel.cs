@@ -14,6 +14,8 @@ public partial class MainWindowViewModel : ViewModelBase
     private readonly IServiceProvider _serviceProvider;
     [ObservableProperty] List<Warehouse> _warehouses;
     [ObservableProperty] private Warehouse _selectedWarehouse;
+    
+    
 
 
     public MainWindowViewModel(IServiceProvider serviceProvider, WareHouseRepository repository)

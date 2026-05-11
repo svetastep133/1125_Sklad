@@ -8,7 +8,9 @@
         x:DataType="viewModels:NewProductViewModel"
         Title="NewProductWindow">
         <Grid>
-                
+                <ComboBox ItemsSource="{Binding Categories}" SelectedItem="{Binding SelectedCategory}"></ComboBox>
+                <TextBox></TextBox>
+                <Button Command="{Binding SaveProductCommand}"></Button>
                 
                 
         </Grid>

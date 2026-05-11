@@ -31,9 +31,10 @@ public class IncomingRepository
                         Id = dr.GetInt32( "Id"),
                         DocNumber = dr.GetString("Doc_number"),
                         Date = dr.GetDateTime( "Date"),
-                        Status = dr.GetString( "Status"),
                         SupplierName = dr.GetString("sName"),
-                        WarehouseName = dr.GetString("Name")
+                        Supplier_id = dr.GetInt32( "Supplier_id"),
+                        WarehouseName = dr.GetString("Name"),
+                        Warehouse_id = dr.GetInt32( "Warehouse_id")
                     });
                 }
             }

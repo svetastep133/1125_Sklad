@@ -32,7 +32,8 @@ public class ProductsRepository
                         Id = dr.GetInt32( "Id"),
                         Name = dr.GetString("Name"),
                         Unit = dr.GetString( "Unit"),
-                        Weight = dr.GetInt32( "Weight"),
+                        Weight = dr.GetDecimal( "Weight"),
+                        Category_id = dr.GetInt32( "Category_id"),
                         CategoriesName = dr.GetString("cName")
                      });
                     
