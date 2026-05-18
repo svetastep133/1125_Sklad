@@ -40,7 +40,13 @@ sealed class Program
                 s.AddTransient<NewProductWindow>();
                 s.AddTransient<IncomingRepository>();
                 s.AddTransient<CategoryRepository>();
-                
+                s.AddTransient<NewProductRepository>();
+                s.AddTransient<SuppliersRepository>();
+                s.AddTransient<AddProductWindow>();
+                s.AddTransient<AddProductviewModel>();
+                s.AddTransient<InfStockWindow>();
+                s.AddTransient<InfStockViewModel>();
+
             }).
             Build();
         BuildAvaloniaApp(host.Services)

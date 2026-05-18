@@ -4,9 +4,7 @@ public class Product
 {
     public int Id { get; set; }
     public string Name { get; set; }
-    public string Unit { get; set; }
     public decimal Weight{ get; set; }
-    public int Category_id{ get; set; }
-    public string CategoriesName {get; set;}
-    
+    public int CategoryId{ get; set; }
+    public string CategoryName {get; set;}
 }

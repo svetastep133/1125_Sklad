@@ -8,10 +8,25 @@
         x:DataType="vm:MainWindowViewModel"
         Icon="/Assets/avalonia-logo.ico"
         Title="_1125_Sveta">
-
-     <Grid HorizontalAlignment="Center" VerticalAlignment="Center" RowDefinitions="Auto Auto">
-             <ComboBox FontSize="27" Width="329" Height="52" SelectedItem="{Binding SelectedWarehouse}" 
-                       ItemsSource="{Binding Warehouses}" DisplayMemberBinding="{Binding Name}"/>
-             <Button Grid.Row="1" FontSize="25" Width="120" Height="47" HorizontalAlignment="Center" VerticalAlignment="Center"  Content="Выбрать" Command="{Binding OpenSkladCommand}"/>    
-     </Grid>
+        <Grid>
+     <Grid.RowDefinitions>
+             <RowDefinition Height="*"/>
+             <RowDefinition Height="Auto"/>
+             <RowDefinition Height="*"/>
+     </Grid.RowDefinitions>
+                <StackPanel Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Center" Spacing="10" >
+                        <TextBlock HorizontalAlignment="Center" FontSize="35" Text="Выберите склад"/>
+                        <ComboBox HorizontalAlignment="Center" VerticalAlignment="Center"  FontSize="27" Width="329" Height="52" 
+                                  SelectedItem="{Binding SelectedWarehouse}" 
+                                  ItemsSource="{Binding Warehouses}" DisplayMemberBinding="{Binding Name}"/>
+                                     <Button Grid.Row="1" FontWeight="Bold" VerticalAlignment="Center" FontSize="25" Width="129" Height="47" 
+                                             HorizontalAlignment="Center"   Content="Выбрать" Command="{Binding OpenSkladCommand}"/>   
+                </StackPanel>
+            
+             <Button Grid.Row="2" FontWeight="Bold" FontSize="22" Width="185" Height="42" 
+                     HorizontalAlignment="Left" VerticalAlignment="Bottom" Content="Создать товар" Command="{Binding AddProductCommand}"/>
+     
+        
+        </Grid>
+        
 </Window>

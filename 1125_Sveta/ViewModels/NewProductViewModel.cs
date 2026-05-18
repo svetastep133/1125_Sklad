@@ -14,9 +14,15 @@ public partial class NewProductViewModel:ViewModelBase
     private readonly ProductsRepository _productsRepository;
     private readonly CategoryRepository _categoryRepository;
     private readonly NewProductRepository _newProductRepository;
-    
+    private readonly WareHouseRepository _warehouseRepository;
+    private readonly SuppliersRepository _supplierRepository;
+    private readonly Warehouse _currentWarehouse;
+
+
     private Product _product;
     
+    
+    private Action _closeAction;
     [ObservableProperty]
     private Category _selectedCategory;
     [ObservableProperty]
@@ -33,11 +39,9 @@ public partial class NewProductViewModel:ViewModelBase
     private List<Warehouse> _warehouses;
     
     [ObservableProperty]
-    private string _productName;
-    [ObservableProperty]
-    private string _productUnit;
-    [ObservableProperty]
-    private string _productWeight;
+   private Product _selectedProduct;
+   [ObservableProperty] 
+   private List<Product> _products;
     
     [ObservableProperty]
     private string _incomingDocNumber;
@@ -47,32 +51,36 @@ public partial class NewProductViewModel:ViewModelBase
     [ObservableProperty]
     private string _incomingItemCost;
     
-    [ObservableProperty]
-    private string _stockQuantity;
+  
     [ObservableProperty]
     private string _stockReserved;
     
-    public NewProductViewModel(StockRepository stockRepository,ProductsRepository productsRepository,CategoryRepository categoryRepository, NewProductRepository newProductRepository)
+    public NewProductViewModel(StockRepository stockRepository,
+        ProductsRepository productsRepository,CategoryRepository categoryRepository, NewProductRepository newProductRepository, 
+        WareHouseRepository warehouseRepository, SuppliersRepository supplierRepository, Warehouse currentWarehouse)
     {
         _stockRepository = stockRepository;
         _productsRepository = productsRepository;
         _categoryRepository = categoryRepository;
         _newProductRepository = newProductRepository;
+        _warehouseRepository = warehouseRepository;
+        _supplierRepository = supplierRepository;
+        SelectedWarehouse = currentWarehouse;
         Categories = _categoryRepository.GetCategories();
+        Warehouses= _warehouseRepository.GetWarehouses();
+        Suppliers= _supplierRepository.GetSuppliers();
+        Products = _productsRepository.GetProducts();
     }
-    
+    public void SetClose(Action action)
+    {
+        _closeAction = action;
+    }
     [RelayCommand]
      public void SaveProduct()
      {
-         Product product = new Product();
-         product.Name = ProductName;
-         product.Unit = ProductUnit;
-         product.Weight = decimal.Parse(ProductWeight);
-         product.Category_id = SelectedCategory.Id;
-
          Incoming incoming = new();
-         incoming.Supplier_id = SelectedSupplier.Id;
-         incoming.Warehouse_id = SelectedWarehouse.Id;
+         incoming.SupplierId = SelectedSupplier.Id;
+         incoming.WarehouseId = SelectedWarehouse.Id;
          incoming.DocNumber = IncomingDocNumber;
          incoming.Date = DateTime.Now;
          
@@ -81,11 +89,10 @@ public partial class NewProductViewModel:ViewModelBase
          incomingItem.Cost = int.Parse(IncomingItemCost);
          
          Stock stock = new Stock();
-         stock.Quantity = int.Parse(StockQuantity);
          stock.LastUpdated = DateTime.Now;
-         stock.Reserved = int.Parse(StockReserved);
          
-         _newProductRepository.SaveProduct(product, SelectedCategory, incoming, incomingItem, stock, SelectedWarehouse, SelectedSupplier);
+         _newProductRepository.SaveProduct(SelectedProduct, incoming, incomingItem, stock, SelectedWarehouse, SelectedSupplier);
+         _closeAction?.Invoke();  
      }
     
 }

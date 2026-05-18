@@ -1,0 +1,25 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:viewModels="clr-namespace:_1125_Sveta.ViewModels"
+        mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+        x:Class="_1125_Sveta.Views.AddProductWindow"
+        x:DataType="viewModels:AddProductviewModel"
+        Title="AddProductWindow" Height="400" Width="500" WindowStartupLocation="CenterScreen">
+        <Grid RowDefinitions="Auto Auto" HorizontalAlignment="Center" VerticalAlignment="Center">
+                <StackPanel Spacing="3">
+                    <TextBlock FontWeight="Bold" Text="Введите название товара"/>    
+                    <TextBox Text="{Binding ProductName}"/>
+                    <TextBlock FontWeight="Bold" Text="Введите вес товара (в кг)"/>   
+                        <TextBox Text="{Binding ProductWeight}"/>
+                    <TextBlock FontWeight="Bold" Text="Выберите категорию товара"/>   
+                        <ComboBox SelectedItem="{Binding SelectedCategory}" ItemsSource="{Binding Categories}" 
+                                  DisplayMemberBinding="{Binding Name}"/>
+                    
+                </StackPanel>
+            <Button Grid.Row="1" FontWeight="Bold"  Content="Добавить" Command="{Binding AddPRoductCommand}"/>
+                
+                
+        </Grid>
+</Window>

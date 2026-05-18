@@ -7,5 +7,5 @@ public class Outgoing
     public int Id { get; set; }
     public string DocNumber { get; set; }
     public DateTime Date { get; set; } 
-    public string Status { get; set; }
+  
 }

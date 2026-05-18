@@ -22,8 +22,7 @@ public partial class MainWindowViewModel : ViewModelBase
     {
         _serviceProvider = serviceProvider;
         Warehouses = repository.GetWarehouses();
-        Warehouses.Insert(0, new Warehouse{Name = "Выберите склад"});
-        SelectedWarehouse = Warehouses[0];
+        
     }
 
     [RelayCommand]
@@ -36,6 +35,19 @@ public partial class MainWindowViewModel : ViewModelBase
         var win = _serviceProvider.GetRequiredService<StockWindow>();
         win.DataContext = vm;
         win.Show();
+        
+    }
+
+    [RelayCommand]
+    public void AddProduct()
+    {
+        var vm = ActivatorUtilities.CreateInstance<AddProductviewModel>(
+            _serviceProvider);
+        var win = _serviceProvider.GetRequiredService<AddProductWindow>();
+        win.DataContext = vm;
+        win.Show();
+        
+        vm.SetClose(win.Close);
     }
 
     

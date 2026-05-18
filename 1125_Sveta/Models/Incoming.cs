@@ -9,8 +9,8 @@ public class Incoming
     public DateTime Date { get; set; } 
     public string SupplierName { get; set; }
     
-    public int Supplier_id { get; set; }
+    public int SupplierId { get; set; }
     public string WarehouseName { get; set; }
     
-    public int Warehouse_id { get; set; }
+    public int WarehouseId { get; set; }
 }

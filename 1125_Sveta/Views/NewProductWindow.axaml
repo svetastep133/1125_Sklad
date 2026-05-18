@@ -7,10 +7,24 @@
         x:Class="_1125_Sveta.Views.NewProductWindow"
         x:DataType="viewModels:NewProductViewModel"
         Title="NewProductWindow">
-        <Grid>
-                <ComboBox ItemsSource="{Binding Categories}" SelectedItem="{Binding SelectedCategory}"></ComboBox>
-                <TextBox></TextBox>
-                <Button Command="{Binding SaveProductCommand}"></Button>
+        <Grid RowDefinitions="Auto Auto" HorizontalAlignment="Center" VerticalAlignment="Center">
+                <StackPanel>
+                    <TextBlock  FontWeight="Bold" Text="Выберите существующий товар"/>   
+                    <ComboBox Height="30" Width="309" SelectedItem="{Binding SelectedProduct}" ItemsSource="{Binding Products}"
+                              DisplayMemberBinding="{Binding Name}"/>
+                    <TextBlock FontWeight="Bold" Text="Введите номер договора о поставке"/>   
+                        <TextBox Height="30" Width="309"  Text="{Binding IncomingDocNumber}"/>
+                    <TextBlock FontWeight="Bold" Text="Выберите поставщика"/>   
+                        <ComboBox Height="30" Width="309"  SelectedItem="{Binding SelectedSupplier}" ItemsSource="{Binding Suppliers}"
+                                  DisplayMemberBinding="{Binding Name}"/>
+                    
+                    <TextBlock FontWeight="Bold" Text="Введите цену товара"/>   
+                        <TextBox Height="30" Width="309"  Text="{Binding IncomingItemCost}"/>
+                    <TextBlock FontWeight="Bold" Text="Введите количество поступивших товаров"/>   
+                        <TextBox Height="30" Width="309" Text="{Binding IncomingItemQuantity}"/>
+                    
+                </StackPanel>
+            <Button Grid.Row="1" Content="Добавить" Command="{Binding SaveProductCommand}"/>
                 
                 
         </Grid>

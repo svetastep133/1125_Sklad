@@ -12,58 +12,62 @@ public class NewProductRepository
     {
         connection = new MySqlConnection(connect.Value.ConnectionString);
     }
-     public void SaveProduct(Product product, Category category,Incoming incoming, IncomingItem incomingItem, Stock stock, Warehouse warehouse, Supplier supplier )
+     public void SaveProduct(Product product,Incoming incoming, IncomingItem incomingItem, Stock stock, Warehouse warehouse, Supplier supplier )
     {
-        string sql1="insert into Products  values(0, @Name,@Unit,@Weight,@Category_id)";
-        string sql2 = "insert into Incoming values (0, @Doc_number, @Supplier_id, @Warehouse_id, @Date, @Status)";
+       // string sql1="insert into Products  values(0, @Name,@Weight,@Category_id)";
+        string sql2 = "insert into Incoming values (0, @Doc_number, @Supplier_id, @Warehouse_id, @Date)";
         string sql3 = "insert into Incoming_items values (0, @Incoming_id, @Product_id, @Cost, @Quantity)";
-        string sql4 ="insert into Stock values (0, @Product_id, @Warehouse_id ,@Quantity, @Reserved, @Last_updated)";
-        using var transaction = connection.BeginTransaction();
+        string sql4 ="insert INTO  Stock Values (@Product_id, @Warehouse_id, @Quantity, CURRENT_TIMESTAMP()) on DUPLICATE KEY UPDATE `Quantity` = `Quantity`+ @Quantity, Last_updated = CURRENT_TIMESTAMP()";
+        MySqlTransaction transaction = null;
         try
         {
             connection.Open();
-            using (var mc1 = new MySqlCommand(sql1, connection, transaction))
-            {
-                mc1.Parameters.AddWithValue("Name", product.Name );
-                mc1.Parameters.AddWithValue("Unit", product.Unit );
-                mc1.Parameters.AddWithValue("Weight", product.Weight );
-                mc1.Parameters.AddWithValue("Category_id", category.Id);
-                mc1.ExecuteNonQuery();
-            }
+            transaction = connection.BeginTransaction();
             using (var mc2 = new MySqlCommand(sql2, connection, transaction))
             {
-                mc2.Parameters.AddWithValue("DocNumber", incoming.DocNumber );
-                mc2.Parameters.AddWithValue("Supplier_id", supplier.Id);
-                mc2.Parameters.AddWithValue("Warehouse_id", warehouse.Id );
-                mc2.Parameters.AddWithValue("Date", incoming.Date );
+                mc2.Parameters.AddWithValue("Doc_number", incoming.DocNumber);
+                mc2.Parameters.AddWithValue("Supplier_id", incoming.SupplierId);
+                mc2.Parameters.AddWithValue("Warehouse_id", incoming.WarehouseId);
+                mc2.Parameters.AddWithValue("Date", incoming.Date);
                 mc2.ExecuteNonQuery();
             }
+
+            using (var mc2 = new MySqlCommand("SELECT LAST_INSERT_ID();", connection, transaction))
+                incoming.Id = Convert.ToInt32(mc2.ExecuteScalar());
+            incomingItem.IncomingId = incoming.Id;
+            incomingItem.ProductId = product.Id;
+            stock.ProductId = product.Id;
+            stock.WarehouseId = warehouse.Id;
+            stock.LastUpdated = DateTime.Now;
+            stock.Quantity = incomingItem.Quantity;
+
             using (var mc3 = new MySqlCommand(sql3, connection, transaction))
             {
-                mc3.Parameters.AddWithValue("Incoming_id", incoming.Id );
-                mc3.Parameters.AddWithValue("Product_id", product.Id);
+                mc3.Parameters.AddWithValue("Incoming_id", incomingItem.IncomingId);
+                mc3.Parameters.AddWithValue("Product_id", incomingItem.ProductId);
                 mc3.Parameters.AddWithValue("Cost", incomingItem.Cost);
                 mc3.Parameters.AddWithValue("Quantity", incomingItem.Quantity);
                 mc3.ExecuteNonQuery();
             }
+
             using (var mc4 = new MySqlCommand(sql4, connection, transaction))
             {
-                mc4.Parameters.AddWithValue("Product_id", product.Id );
-                mc4.Parameters.AddWithValue("Warehouse_id", warehouse.Id );
-                mc4.Parameters.AddWithValue("Quantity", stock.Quantity );
-                mc4.Parameters.AddWithValue("Reserved", stock.Reserved );
-                mc4.Parameters.AddWithValue("Last_updated", stock.LastUpdated );
+                mc4.Parameters.AddWithValue("Product_id", stock.ProductId);
+                mc4.Parameters.AddWithValue("Warehouse_id", stock.WarehouseId);
+                mc4.Parameters.AddWithValue("Quantity", stock.Quantity);
                 mc4.ExecuteNonQuery();
             }
-            connection.Close();
             transaction.Commit();
-            
         }
         catch (Exception e)
         {
             Console.WriteLine(e.Message);
-            transaction.Rollback();
-            
+            transaction?.Rollback();
+
+        }
+        finally
+        {
+            connection.Close();
         }
     }
     
