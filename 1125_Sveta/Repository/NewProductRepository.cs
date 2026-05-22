@@ -14,7 +14,6 @@ public class NewProductRepository
     }
      public void SaveProduct(Product product,Incoming incoming, IncomingItem incomingItem, Stock stock, Warehouse warehouse, Supplier supplier )
     {
-       // string sql1="insert into Products  values(0, @Name,@Weight,@Category_id)";
         string sql2 = "insert into Incoming values (0, @Doc_number, @Supplier_id, @Warehouse_id, @Date)";
         string sql3 = "insert into Incoming_items values (0, @Incoming_id, @Product_id, @Cost, @Quantity)";
         string sql4 ="insert INTO  Stock Values (@Product_id, @Warehouse_id, @Quantity, CURRENT_TIMESTAMP()) on DUPLICATE KEY UPDATE `Quantity` = `Quantity`+ @Quantity, Last_updated = CURRENT_TIMESTAMP()";

@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Windows.Input;
 using _1125_Sveta.Models;
 using _1125_Sveta.Repository;
@@ -16,7 +17,9 @@ public partial class AddProductviewModel: ViewModelBase
     private readonly ProductsRepository _productsRepository;
     private readonly CategoryRepository _categoryRepository;
     [ObservableProperty] List<Category> _categories;
+    [ObservableProperty] List<Product> _product;
      private Action _closeAction;
+     public ObservableCollection<Product> Products { get; set; }
     
     [ObservableProperty]
     private string _productName;
@@ -38,6 +41,7 @@ public partial class AddProductviewModel: ViewModelBase
     {
         _closeAction = action;
     }
+    
     
     [RelayCommand]
     public void AddPRoduct()

@@ -10,11 +10,7 @@ public class Stock
     public string ProductsName { get; set; }
     public int ProductId { get; set; }
     public int WarehouseId { get; set; }
-    /*public Product Product { get; set; }
-    public IncomingItem IncomingItem { get; set; }
-    public Incoming Incoming { get; set; }
-    public Supplier Supplier { get; set; }
-    public Category Category { get; set; }*/
+     public string CategoryName { get; set; }
     
     
 }

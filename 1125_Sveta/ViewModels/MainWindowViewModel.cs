@@ -12,6 +12,7 @@ namespace _1125_Sveta.ViewModels;
 public partial class MainWindowViewModel : ViewModelBase
 {
     private readonly IServiceProvider _serviceProvider;
+    private MainWindow _currentWindow;
     [ObservableProperty] List<Warehouse> _warehouses;
     [ObservableProperty] private Warehouse _selectedWarehouse;
     
@@ -35,7 +36,8 @@ public partial class MainWindowViewModel : ViewModelBase
         var win = _serviceProvider.GetRequiredService<StockWindow>();
         win.DataContext = vm;
         win.Show();
-        
+        vm.SetClose(win.Close);
+       
     }
 
     [RelayCommand]
@@ -48,6 +50,11 @@ public partial class MainWindowViewModel : ViewModelBase
         win.Show();
         
         vm.SetClose(win.Close);
+    }
+
+    public void SetWindow(MainWindow window)
+    {
+        _currentWindow = window;
     }
 
     

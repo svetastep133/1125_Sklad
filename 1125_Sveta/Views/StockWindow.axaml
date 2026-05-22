@@ -7,23 +7,27 @@
         x:Class="_1125_Sveta.Views.StockWindow"
         x:DataType="viewModels:StockViewModel"
         Title="StockWindow">
-  <Grid RowDefinitions="Auto Auto Auto *" >
-      <Label HorizontalAlignment="Center" FontWeight="Bold" FontSize="28" Content="{Binding SelectedWarehouse.Name}"/>
+  <Grid RowDefinitions="Auto Auto Auto * Auto" >
+      <Button  FontWeight="Bold" FontSize="20" Width="81" Height="40" HorizontalAlignment="Left" VerticalAlignment="Top" Command="{Binding BackCommand}" Content="Назад" />
+      <Label Grid.Row="0"  HorizontalAlignment="Center" FontWeight="Bold" FontSize="28" Content="{Binding SelectedWarehouse.Name}"/>
       <Label  Grid.Row="1" HorizontalAlignment="Center"  FontSize="22" Content="{Binding SelectedWarehouse.Location}"/>
-      <ListBox Grid.Row="2" ItemsSource="{Binding Stocks}" SelectedItem="{Binding SelectedStock}" >
-        <ListBox.ItemTemplate>
-            
-            
-            <DataTemplate>
-                <StackPanel>
-                <TextBlock FontSize="20" FontWeight="Bold" Text="{Binding ProductsName}" />
-                <TextBlock FontSize="18" Text="{Binding Quantity, StringFormat={}Общее количество: {0}}"/>
-                <TextBlock FontSize="18" Text="{Binding LastUpdated, StringFormat={}Последнее обновление: {0}}"/>
-               </StackPanel>
-            </DataTemplate>
-        </ListBox.ItemTemplate>
-      </ListBox> 
-      <Button  Grid.Row="3" FontWeight="Bold" FontSize="20" Width="117" Height="40" VerticalAlignment="Bottom" Command="{Binding AddProductCommand}" Content="Добавить"/> 
-      <Button Grid.Row="3" FontWeight="Bold" FontSize="20" Width="130" Height="40" VerticalAlignment="Bottom"  HorizontalAlignment="Right" Command="{Binding InfCommand}" Content="Подробнее"/>
+          <ListBox Grid.Row="3" ItemsSource="{Binding Stocks}" SelectedItem="{Binding SelectedStock}" >
+                          <ListBox.ItemTemplate>
+                      <DataTemplate>
+                          <StackPanel>
+                          <TextBlock FontSize="20" FontWeight="Bold" Text="{Binding ProductsName}" />
+                          <TextBlock FontSize="18"  Text="{Binding CategoryName}" />
+                          <TextBlock FontSize="18" Text="{Binding Quantity, StringFormat={}Общее количество: {0}}"/>
+                          <TextBlock FontSize="18" Text="{Binding LastUpdated, StringFormat={}Последнее обновление: {0}}"/>
+                         </StackPanel>
+                      </DataTemplate>
+                  </ListBox.ItemTemplate>
+          </ListBox> 
+          <StackPanel Grid.Row="4"  VerticalAlignment="Bottom" HorizontalAlignment="Left">
+              <Button   FontWeight="Bold" FontSize="20" Width="130" Height="40" VerticalAlignment="Top" Command="{Binding AddProductCommand}" Content="Добавить"/> 
+              <Button   FontWeight="Bold" FontSize="20" Width="130" Height="40" VerticalAlignment="Bottom"  Command="{Binding OutProductCommand}" Content="Отправить"/>
+          </StackPanel>
+      <Button  Grid.Row="4"  FontWeight="Bold" FontSize="20" Width="130" Height="40" VerticalAlignment="Bottom"  HorizontalAlignment="Right" Command="{Binding InfCommand}" Content="Подробнее"/>
   </Grid>
+    
 </Window>

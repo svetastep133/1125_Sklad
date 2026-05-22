@@ -17,7 +17,6 @@
                     <TextBlock FontWeight="Bold" Text="Выберите поставщика"/>   
                         <ComboBox Height="30" Width="309"  SelectedItem="{Binding SelectedSupplier}" ItemsSource="{Binding Suppliers}"
                                   DisplayMemberBinding="{Binding Name}"/>
-                    
                     <TextBlock FontWeight="Bold" Text="Введите цену товара"/>   
                         <TextBox Height="30" Width="309"  Text="{Binding IncomingItemCost}"/>
                     <TextBlock FontWeight="Bold" Text="Введите количество поступивших товаров"/>   

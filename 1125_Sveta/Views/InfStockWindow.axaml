@@ -7,9 +7,24 @@
         x:Class="_1125_Sveta.Views.InfStockWindow"
         x:DataType="viewModels:InfStockViewModel"
         Title="InfProductWindow">
-        <Grid RowDefinitions="Auto Auto" >
+        <Grid RowDefinitions="Auto Auto Auto Auto" >
                 <Label HorizontalAlignment="Center" FontWeight="Bold" FontSize="28" Content="{Binding SelectedStock.ProductsName}"/>
-                <Label  Grid.Row="1" HorizontalAlignment="Center"  FontSize="22" Content="{Binding SelectedStock.ProductsName}"/>
-                
+                <Label  Grid.Row="1" HorizontalAlignment="Center"  FontSize="22" Content="{Binding SelectedStock.CategoryName}"/>
+                <ListBox Grid.Row="2" ItemsSource="{Binding Products}" >
+                    <ListBox.ItemTemplate>
+            <DataTemplate>
+                <StackPanel >
+                    <TextBlock FontSize="18" FontWeight="Bold" Text="{Binding SupplierName, StringFormat={}Поставщик: {0}}"/>
+                    <TextBlock FontSize="18" Text="{Binding DocNumber, StringFormat={}Номер договора о поставке: {0}}"/>
+                    <TextBlock FontSize="18" Text="{Binding Email, StringFormat={}Электронная почта поставщика: {0}}"/>
+                    <TextBlock FontSize="18" Text="{Binding Cost, StringFormat={}Цена: {0}}"/>
+                    <TextBlock FontSize="18" Text="{Binding Quantity, StringFormat={}Количество товаров: {0}}"/>
+                    <TextBlock FontSize="18" Text="{Binding  OutQuantity, StringFormat={}Количество  отправленных товаров: {0}}"/>
+                    <TextBlock FontSize="18" Text="{Binding Weight, StringFormat={}Вес товара(кг): {0}}"/>
+                    <TextBlock FontSize="18" Text="{Binding Date, StringFormat={}Последнее обновление: {0}}"/>
+                </StackPanel>
+            </DataTemplate>
+                    </ListBox.ItemTemplate>
+                </ListBox>
         </Grid>
 </Window>

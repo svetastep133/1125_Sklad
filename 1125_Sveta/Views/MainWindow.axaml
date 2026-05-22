@@ -22,7 +22,6 @@
                                      <Button Grid.Row="1" FontWeight="Bold" VerticalAlignment="Center" FontSize="25" Width="129" Height="47" 
                                              HorizontalAlignment="Center"   Content="Выбрать" Command="{Binding OpenSkladCommand}"/>   
                 </StackPanel>
-            
              <Button Grid.Row="2" FontWeight="Bold" FontSize="22" Width="185" Height="42" 
                      HorizontalAlignment="Left" VerticalAlignment="Bottom" Content="Создать товар" Command="{Binding AddProductCommand}"/>
      

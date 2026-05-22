@@ -46,6 +46,10 @@ sealed class Program
                 s.AddTransient<AddProductviewModel>();
                 s.AddTransient<InfStockWindow>();
                 s.AddTransient<InfStockViewModel>();
+                s.AddTransient<InfRepository>();
+                s.AddTransient<OutProductRepository>();
+                s.AddTransient<OutProductWindow>();
+                s.AddTransient<OutProductViewModel>();
 
             }).
             Build();

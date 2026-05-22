@@ -16,7 +16,6 @@
                     <TextBlock FontWeight="Bold" Text="Выберите категорию товара"/>   
                         <ComboBox SelectedItem="{Binding SelectedCategory}" ItemsSource="{Binding Categories}" 
                                   DisplayMemberBinding="{Binding Name}"/>
-                    
                 </StackPanel>
             <Button Grid.Row="1" FontWeight="Bold"  Content="Добавить" Command="{Binding AddPRoductCommand}"/>
                 
