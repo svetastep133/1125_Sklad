@@ -2,8 +2,10 @@ using System;
 using System.Collections.Generic;
 using _1125_Sveta.Models;
 using _1125_Sveta.Repository;
+using _1125_Sveta.Views;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace _1125_Sveta.ViewModels;
 
@@ -47,6 +49,7 @@ public partial class OutProductViewModel : ViewModelBase
     [ObservableProperty]
     private string _outgoingItemCost;
     
+    
   
     [ObservableProperty]
     private string _stockReserved;
@@ -56,6 +59,7 @@ public partial class OutProductViewModel : ViewModelBase
         OutProductRepository outProductRepository,
         WareHouseRepository warehouseRepository, SuppliersRepository supplierRepository, Warehouse currentWarehouse)
     {
+      
         _stockRepository = stockRepository;
         _productsRepository = productsRepository;
         _categoryRepository = categoryRepository;
@@ -75,7 +79,12 @@ public partial class OutProductViewModel : ViewModelBase
     {
         _closeAction = action;
     }
-    
+
+    public void OutAndAddProduct()
+    {
+        
+    }
+
     
     [RelayCommand]
     public void SaveOutProduct()

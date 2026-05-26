@@ -8,7 +8,8 @@
         x:DataType="viewModels:InfStockViewModel"
         Title="InfProductWindow">
         <Grid RowDefinitions="Auto Auto Auto Auto" >
-                <Label HorizontalAlignment="Center" FontWeight="Bold" FontSize="28" Content="{Binding SelectedStock.ProductsName}"/>
+            <Button FontWeight="Bold" FontSize="20" Width="81" Height="40" HorizontalAlignment="Left" VerticalAlignment="Top"  Command="{Binding BackCommand}" />
+            <Label HorizontalAlignment="Center" FontWeight="Bold" FontSize="28" Content="{Binding SelectedStock.ProductsName}"/>
                 <Label  Grid.Row="1" HorizontalAlignment="Center"  FontSize="22" Content="{Binding SelectedStock.CategoryName}"/>
                 <ListBox Grid.Row="2" ItemsSource="{Binding Products}" >
                     <ListBox.ItemTemplate>

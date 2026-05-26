@@ -29,21 +29,22 @@ public class WareHouseRepository
                 {
                     warehouses.Add(new Warehouse
                     {
-                        Id = dr.GetInt32( "Id"),
+                        Id = dr.GetInt32("Id"),
                         Name = dr.GetString("Name"),
                         Location = dr.GetString("Location"),
                     });
                 }
             }
-            
-
-            connection.Close();
 
         }
         catch (Exception e)
         {
             Console.WriteLine(e);
-          
+
+        }
+        finally
+        {
+            connection.Close();
         }
         
         

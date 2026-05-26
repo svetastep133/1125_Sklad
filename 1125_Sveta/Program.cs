@@ -50,6 +50,7 @@ sealed class Program
                 s.AddTransient<OutProductRepository>();
                 s.AddTransient<OutProductWindow>();
                 s.AddTransient<OutProductViewModel>();
+                s.AddTransient<IncomingItemRepository>();
 
             }).
             Build();

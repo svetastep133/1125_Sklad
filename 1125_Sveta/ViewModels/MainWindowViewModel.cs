@@ -37,7 +37,7 @@ public partial class MainWindowViewModel : ViewModelBase
         win.DataContext = vm;
         win.Show();
         vm.SetClose(win.Close);
-       
+        vm.SetWindow(win);
     }
 
     [RelayCommand]

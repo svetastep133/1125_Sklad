@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using _1125_Sveta.Models;
 using _1125_Sveta.Repository;
 using _1125_Sveta.Views;
@@ -18,13 +19,35 @@ public partial class StockViewModel : ViewModelBase
     [ObservableProperty] private Warehouse _selectedWarehouse;
     [ObservableProperty] private Stock? _selectedStock;
     [ObservableProperty] private Product? _selectedProduct;
+
+    private StockWindow _stockWindow;
+    private List<Stock> _allStocks;
+    public string SearchText
+    {
+        get => _searchText;
+        set
+        {
+            if (value == _searchText) return;
+            _searchText = value;
+            OnPropertyChanged();
+            Search();
+        }
+    }
+
+    private void Search()
+    {
+       Stocks=new List<Stock>( _allStocks.Where(s => s.ProductsName.ToLower().Contains(SearchText.ToLower())));
+    }
+
     private Action _closeAction;
-    
+    private string _searchText;
+
 
     public StockViewModel(IServiceProvider serviceProvider, StockRepository stockRepository, Warehouse house,WareHouseRepository wareHouseRepository)
     {
         _serviceProvider = serviceProvider;
-        _stocks = stockRepository.GetStocks(house);
+        _allStocks = stockRepository.GetStocks(house);
+        _stocks=new List<Stock>(_allStocks);
         _stockRepository = stockRepository;
         _house = house;
         SelectedWarehouse = house;
@@ -60,7 +83,16 @@ public partial class StockViewModel : ViewModelBase
         var win = _serviceProvider.GetRequiredService<InfStockWindow>();
         win.DataContext = vm;
         win.Show();
+        vm.SetClose(win.Close);
         
+        win.Closed += InfStockWindowClosed;
+        
+        _stockWindow.Hide();
+    }
+
+    private void InfStockWindowClosed(object? sender, EventArgs e)
+    {
+        _stockWindow.Show();
     }
 
     [RelayCommand]
@@ -86,6 +118,7 @@ public partial class StockViewModel : ViewModelBase
         win.DataContext = vm;
         win.Show();
         vm.SetClose(win.Close);
+       _closeAction?.Invoke();
     }
 
     public void SetClose(Action closeAction)
@@ -93,13 +126,24 @@ public partial class StockViewModel : ViewModelBase
         _closeAction = closeAction;
     }
 
-   
-    
-   
+    [RelayCommand]
+    public void DeleteStock()
+    {
+        if (SelectedStock == null)
+            return;
+
+        if (_stockRepository.DeleteStock(SelectedStock.WarehouseId, SelectedStock.ProductId))
+        {
+            _allStocks = _stockRepository.GetStocks(_house);
+            Stocks = new  List<Stock>(_allStocks);
+        }
 
 
+    }
 
 
-
-
+    public void SetWindow(StockWindow win)
+    {
+        _stockWindow = win;
+    }
 }

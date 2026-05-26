@@ -15,6 +15,33 @@ public class StockRepository
         connection = new MySqlConnection(connect.Value.ConnectionString);
     }
 
+    public bool DeleteStock(int id,int id2)
+    {
+        string sql = "DELETE FROM `Stock` WHERE Product_id=@Product_Id and Warehouse_id=@Warehouse_Id";
+        try
+        {
+            connection.Open();
+            using (var cmd = new MySqlCommand(sql, connection))
+            {
+                cmd.Parameters.AddWithValue("@Product_Id", id2);
+                cmd.Parameters.AddWithValue("@Warehouse_Id", id);
+                cmd.ExecuteNonQuery();
+            }
+            connection.Close();
+            return true;
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine(ex.Message);
+            connection.Close();
+        }
+        
+        return false;
+        
+
+    }
+    
+
     public List<Stock> GetStocks(Warehouse house)
     {
         List<Stock> stocks = new List<Stock>();
