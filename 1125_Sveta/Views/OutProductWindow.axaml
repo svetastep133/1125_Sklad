@@ -7,15 +7,13 @@
         x:Class="_1125_Sveta.Views.OutProductWindow"
         x:DataType="viewModels:OutProductViewModel"
         Title="OutProductWindow">
-        <Grid RowDefinitions="Auto Auto" HorizontalAlignment="Center" VerticalAlignment="Center">
-                <StackPanel>
-                    <TextBlock  FontWeight="Bold" Text="Выберите товар"/>   
-                        <ComboBox Height="30" Width="309" SelectedItem="{Binding SelectedProduct}" ItemsSource="{Binding Products}"
-                                  DisplayMemberBinding="{Binding Name}"/>
+        <Grid RowDefinitions="Auto Auto" HorizontalAlignment="Center" VerticalAlignment="Center" RowSpacing="10">
+                <StackPanel Spacing="5">
+                        
                         <TextBlock FontWeight="Bold" Text="Введите номер договора об отправке"/>   
                         <TextBox Height="30" Width="309"  Text="{Binding OutgoingDocNumber}"/>
-                        <TextBlock FontWeight="Bold" Text="Выберите поставщика"/>   
-                        <ComboBox Height="30" Width="309"  SelectedItem="{Binding SelectedSupplier}" ItemsSource="{Binding Suppliers}"
+                        <TextBlock FontWeight="Bold" Text="Выберите получателя"/>   
+                        <ComboBox Height="30" Width="309"  SelectedItem="{Binding SelectedBuyer}" ItemsSource="{Binding Buyer}"
                                   DisplayMemberBinding="{Binding Name}"/>
                         <TextBlock FontWeight="Bold" Text="Введите цену товара"/>   
                         <TextBox Height="30" Width="309"  Text="{Binding OutgoingItemCost}"/>
@@ -24,7 +22,7 @@
                         <TextBox Height="30" Width="309" Text="{Binding OutgoingItemQuantity}"/>
                     
                 </StackPanel>
-                <Button Grid.Row="1" Content="Отправить" Command="{Binding SaveOutProductCommand}"/>
+                <Button Grid.Row="1" FontWeight="Bold" HorizontalAlignment="Center" Content="Отправить" Command="{Binding SaveOutProductCommand}"/>
                 
                 
         </Grid>

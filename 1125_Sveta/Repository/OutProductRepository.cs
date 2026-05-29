@@ -12,11 +12,15 @@ public class OutProductRepository
     {
         connection = new MySqlConnection(connect.Value.ConnectionString);
     }
-     public void SaveProduct(Product product,Outgoing outgoing, OutgoingItem outgoingItem, Stock stock, Warehouse warehouse, Supplier supplier )
+     public void SaveProduct(Outgoing outgoing, OutgoingItem outgoingItem, Stock stock )
     {
-        string sql2 = "insert into Outgoing values (0, @Doc_number, @Supplier_id, @Warehouse_id, @Date)";
+        // добавить запрос на проверку наличия указанного товара в указанном количестве на указанном складе       
+            // если FALSE , то прерываемся, пишем ошибку - не хватает товара
+            
+        string sql2 = "insert into Outgoing values (0, @Doc_number, @Warehouse_id, @Date,@Buyer_id)";
         string sql3 = "insert into Outgoing_items (`id`, `Outgoing_id`, `Product_id`, `Cost`, `Quantity`) values (0, @Outgoing_id, @Product_id, @Cost, @Quantity)";
         string sql4 ="insert INTO  Stock Values (@Product_id, @Warehouse_id, @Quantity, CURRENT_TIMESTAMP()) on DUPLICATE KEY UPDATE `Quantity` = `Quantity`- @Quantity, Last_updated = CURRENT_TIMESTAMP()";
+        
         MySqlTransaction transaction = null;
         try
         {
@@ -25,20 +29,17 @@ public class OutProductRepository
             using (var mc2 = new MySqlCommand(sql2, connection, transaction))
             {
                 mc2.Parameters.AddWithValue("Doc_number", outgoing.DocNumber);
-                mc2.Parameters.AddWithValue("Supplier_id", outgoing.SupplierId);
+                mc2.Parameters.AddWithValue("Buyer_id", outgoing.BuyerId);
                 mc2.Parameters.AddWithValue("Warehouse_id", outgoing.WarehouseId);
                 mc2.Parameters.AddWithValue("Date", outgoing.Date);
                 mc2.ExecuteNonQuery();
             }
 
-            using (var mc2 = new MySqlCommand("SELECT LAST_INSERT_ID();", connection, transaction))
+            using (var mc2 = new MySqlCommand("SELECT LAST_INSERT_ID();", connection, transaction)) 
                 outgoing.Id = Convert.ToInt32(mc2.ExecuteScalar());
+            
             outgoingItem.OutgoingId = outgoing.Id;
-            outgoingItem.ProductId = product.Id;
-            stock.ProductId = product.Id;
-            stock.WarehouseId = warehouse.Id;
-            stock.LastUpdated = DateTime.Now;
-            stock.Quantity = outgoingItem.Quantity;
+            outgoingItem.ProductId = stock.ProductId;
 
             using (var mc3 = new MySqlCommand(sql3, connection, transaction))
             {
@@ -53,7 +54,7 @@ public class OutProductRepository
             {
                 mc4.Parameters.AddWithValue("Product_id", stock.ProductId);
                 mc4.Parameters.AddWithValue("Warehouse_id", stock.WarehouseId);
-                mc4.Parameters.AddWithValue("Quantity", stock.Quantity);
+                mc4.Parameters.AddWithValue("Quantity", outgoingItem.Quantity);
                 mc4.ExecuteNonQuery();
             }
             transaction.Commit();

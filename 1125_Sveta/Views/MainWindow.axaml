@@ -24,6 +24,8 @@
                 </StackPanel>
              <Button Grid.Row="2" FontWeight="Bold" FontSize="22" Width="185" Height="42" 
                      HorizontalAlignment="Left" VerticalAlignment="Bottom" Content="Создать товар" Command="{Binding AddProductCommand}"/>
+             <Button Grid.Row="2" FontWeight="Bold" FontSize="22" Width="260" Height="42" 
+                     HorizontalAlignment="Right" VerticalAlignment="Bottom" Command="{Binding OpenBuyerCommand}" Content="Добавить покупателя"/>
      
         
         </Grid>

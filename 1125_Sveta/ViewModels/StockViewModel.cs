@@ -71,6 +71,25 @@ public partial class StockViewModel : ViewModelBase
         };
     }
 
+   
+
+    private void InfStockWindowClosed(object? sender, EventArgs e)
+    {
+        _stockWindow.Show();
+    }
+
+    [RelayCommand]
+    public void Back()
+    {
+        var vm = ActivatorUtilities.CreateInstance<MainWindowViewModel>(
+            _serviceProvider);
+       
+        var win = _serviceProvider.GetRequiredService<MainWindow>();
+        win.DataContext = vm;
+        win.Show();
+        _closeAction.Invoke();
+    }
+    
     [RelayCommand]
     public void Inf()
     {
@@ -89,36 +108,25 @@ public partial class StockViewModel : ViewModelBase
         
         _stockWindow.Hide();
     }
-
-    private void InfStockWindowClosed(object? sender, EventArgs e)
-    {
-        _stockWindow.Show();
-    }
-
-    [RelayCommand]
-    public void Back()
-    {
-        var vm = ActivatorUtilities.CreateInstance<MainWindowViewModel>(
-            _serviceProvider);
-       
-        var win = _serviceProvider.GetRequiredService<MainWindow>();
-        win.DataContext = vm;
-        win.Show();
-        _closeAction.Invoke();
-    }
-
+    
     [RelayCommand]
     public void OutProduct()
     {
+        if (SelectedStock == null)
+            return;
+        
         var vm = ActivatorUtilities.CreateInstance<OutProductViewModel>(
-            _serviceProvider, SelectedWarehouse);
+            _serviceProvider, SelectedWarehouse, SelectedStock);      
        
         var win = _serviceProvider.GetRequiredService<OutProductWindow>();
         
         win.DataContext = vm;
         win.Show();
         vm.SetClose(win.Close);
-       _closeAction?.Invoke();
+        win.Closed += (sender, args) =>
+        {
+            Stocks = _stockRepository.GetStocks(_house);
+        };
     }
 
     public void SetClose(Action closeAction)

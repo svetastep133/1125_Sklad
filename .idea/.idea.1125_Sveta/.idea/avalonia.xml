@@ -3,6 +3,7 @@
   <component name="AvaloniaProject">
     <option name="projectPerEditor">
       <map>
+        <entry key="1125_Sveta/Views/AddBuyerWindow.axaml" value="1125_Sveta/1125_Sveta.csproj" />
         <entry key="1125_Sveta/Views/AddProductWindow.axaml" value="1125_Sveta/1125_Sveta.csproj" />
         <entry key="1125_Sveta/Views/InfProductWindow.axaml" value="1125_Sveta/1125_Sveta.csproj" />
         <entry key="1125_Sveta/Views/InfStockWindow.axaml" value="1125_Sveta/1125_Sveta.csproj" />

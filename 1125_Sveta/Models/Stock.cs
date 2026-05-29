@@ -11,6 +11,6 @@ public class Stock
     public int ProductId { get; set; }
     public int WarehouseId { get; set; }
      public string CategoryName { get; set; }
-    
+     
     
 }

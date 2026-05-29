@@ -11,7 +11,7 @@
       <Button  FontWeight="Bold" FontSize="20" Width="81" Height="40" HorizontalAlignment="Left" VerticalAlignment="Top" Command="{Binding BackCommand}" Content="Назад" />
       <Label Grid.Row="0"  HorizontalAlignment="Center" FontWeight="Bold" FontSize="28" Content="{Binding SelectedWarehouse.Name}"/>
       <Label  Grid.Row="1" HorizontalAlignment="Center"  FontSize="22" Content="{Binding SelectedWarehouse.Location}"/>
-      <TextBox Grid.Row="2" Text="{Binding SearchText, UpdateSourceTrigger=PropertyChanged}"/>
+      <TextBox  Grid.Row="2" Watermark="Поиск" Text="{Binding SearchText, UpdateSourceTrigger=PropertyChanged}"/>
           <ListBox Grid.Row="3" ItemsSource="{Binding Stocks}" SelectedItem="{Binding SelectedStock}" >
                           <ListBox.ItemTemplate>
                       <DataTemplate>

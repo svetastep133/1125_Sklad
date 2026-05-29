@@ -8,7 +8,7 @@
         x:DataType="viewModels:InfStockViewModel"
         Title="InfProductWindow">
         <Grid RowDefinitions="Auto Auto Auto Auto" >
-            <Button FontWeight="Bold" FontSize="20" Width="81" Height="40" HorizontalAlignment="Left" VerticalAlignment="Top"  Command="{Binding BackCommand}" />
+            <Button FontWeight="Bold" FontSize="20" Width="81" Height="40" HorizontalAlignment="Left" VerticalAlignment="Top"  Command="{Binding BackCommand}" Content="Назад"/>
             <Label HorizontalAlignment="Center" FontWeight="Bold" FontSize="28" Content="{Binding SelectedStock.ProductsName}"/>
                 <Label  Grid.Row="1" HorizontalAlignment="Center"  FontSize="22" Content="{Binding SelectedStock.CategoryName}"/>
                 <ListBox Grid.Row="2" ItemsSource="{Binding Products}" >
@@ -20,7 +20,6 @@
                     <TextBlock FontSize="18" Text="{Binding Email, StringFormat={}Электронная почта поставщика: {0}}"/>
                     <TextBlock FontSize="18" Text="{Binding Cost, StringFormat={}Цена: {0}}"/>
                     <TextBlock FontSize="18" Text="{Binding Quantity, StringFormat={}Количество товаров: {0}}"/>
-                    <TextBlock FontSize="18" Text="{Binding  OutQuantity, StringFormat={}Количество  отправленных товаров: {0}}"/>
                     <TextBlock FontSize="18" Text="{Binding Weight, StringFormat={}Вес товара(кг): {0}}"/>
                     <TextBlock FontSize="18" Text="{Binding Date, StringFormat={}Последнее обновление: {0}}"/>
                 </StackPanel>

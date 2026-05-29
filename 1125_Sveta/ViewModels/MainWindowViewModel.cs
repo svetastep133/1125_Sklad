@@ -57,6 +57,16 @@ public partial class MainWindowViewModel : ViewModelBase
         _currentWindow = window;
     }
 
-    
+    [RelayCommand]
+    public void OpenBuyer()
+    {var vm = ActivatorUtilities.CreateInstance<AddBuyerViewModel>(
+            _serviceProvider);
+        var win = _serviceProvider.GetRequiredService<AddBuyerWindow>();
+        win.DataContext = vm;
+        win.Show();
+        
+        vm.SetClose(win.Close);
+        
+    }
     
 }
