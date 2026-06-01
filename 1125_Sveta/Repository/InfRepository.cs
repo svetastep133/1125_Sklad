@@ -18,7 +18,7 @@ public class InfRepository
     {
         List<Product> products = new List<Product>();
         string sql =
-            "select p.Id, p.Name, p.Weight, s.Name as sName, ii.Cost, ii.Quantity, i.Doc_number, i.Date, s.Email  from Products p inner join Incoming_items ii on ii.Product_id = p.Id inner join Incoming i on i.Id = ii.Incoming_id inner join Suppliers s on s.Id = i.Supplier_id where p.Id = " + productId;
+            "select p.Id, p.Name, p.Weight, s.Name as sName, ii.Cost, ii.Quantity, i.Doc_number, i.Date, w.Name as wName, s.Email  from Products p inner join Incoming_items ii on ii.Product_id = p.Id inner join Incoming i on i.Id = ii.Incoming_id inner join Warehouses w on w.Id = i.Warehouse_id  inner join Suppliers s on s.Id = i.Supplier_id where p.Id = " + productId;
 
         try
         {
@@ -38,6 +38,7 @@ public class InfRepository
                         DocNumber = dr.GetString("Doc_number"),
                         Date = dr.GetDateTime("Date"),
                         SupplierName = dr.GetString("sName"),
+                        WareHouse= dr.GetString("wName"),
                         Email = dr.GetString("Email"),
 
                     });
@@ -60,7 +61,7 @@ public class InfRepository
     {
         List<Product> products = new List<Product>();
         string sql =
-            "select oi.Quantity from Products p inner join Outgoing_items oi on oi.Product_id = p.Id inner join Outgoing o on o.Id = oi.Outgoing_id  inner join Suppliers s on s.Id = o.Supplier_id where p.Id ="+productId;;
+            "select p.Id, p.Name, p.Weight, b.Name as bName, oi.Cost, o.Doc_number, w.Name as WName, o.Date, oi.Quantity from Products p inner join Outgoing_items oi on oi.Product_id = p.Id inner join Outgoing o on o.Id = oi.Outgoing_id inner join Warehouses w on w.Id = o.Warehouse_id  inner join Buyer b on b.Id = o.Buyer_id where p.Id ="+productId;;
         try
         {
             connection.Open();
@@ -70,7 +71,17 @@ public class InfRepository
                     {
                         products.Add(new Product
                         {
-                            OutQuantity = dr.GetInt32("Quantity"),
+                            Id = dr.GetInt32("Id"),
+                            Name = dr.GetString("Name"),
+                            Weight = dr.GetDecimal("Weight"),
+                            OCost = dr.GetInt32("Cost"),
+                            OQuantity = dr.GetInt32("Quantity"),
+                            ODocNumber = dr.GetString("Doc_number"),
+                            OWareHouse = dr.GetString("wName"),
+                            ODate = dr.GetDateTime("Date"),
+                            BuyerName = dr.GetString("bName"),
+                         
+                            
                         });
                     }
             

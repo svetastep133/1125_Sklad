@@ -12,9 +12,15 @@ public class Product
     
     public int Cost { get; set; }
     public int Quantity { get; set; }
-    public int OutQuantity {get; set;}
     public string DocNumber { get; set; }
     public DateTime Date { get; set; }
     public string SupplierName { get; set; }
     public string Email { get; set; }
+    public string BuyerName{get; set;}
+    public int OCost { get; set; }
+    public int OQuantity { get; set; }
+    public string ODocNumber { get; set; }
+    public DateTime ODate { get; set; }
+    public string WareHouse { get; set; }
+    public string OWareHouse { get; set; }
 }

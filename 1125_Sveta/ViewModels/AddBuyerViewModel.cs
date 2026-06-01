@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using _1125_Sveta.Models;
 using _1125_Sveta.Repository;
+using _1125_Sveta.Views;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using Microsoft.Extensions.DependencyInjection;
@@ -32,6 +33,9 @@ public partial class AddBuyerViewModel:ViewModelBase
         Buyer buyer=new  Buyer();
         buyer.Name = BuyerName;
         _buyerRepository.AddBuyer(buyer);
+        MessageBoxWindow messageBox = new MessageBoxWindow(new MessageBoxViewModel("Покупатель добавлен"));
+         
+        messageBox.Show();
         _closeAction?.Invoke();  
 
     }

@@ -81,12 +81,6 @@ public partial class StockViewModel : ViewModelBase
     [RelayCommand]
     public void Back()
     {
-        var vm = ActivatorUtilities.CreateInstance<MainWindowViewModel>(
-            _serviceProvider);
-       
-        var win = _serviceProvider.GetRequiredService<MainWindow>();
-        win.DataContext = vm;
-        win.Show();
         _closeAction.Invoke();
     }
     
@@ -145,6 +139,9 @@ public partial class StockViewModel : ViewModelBase
             _allStocks = _stockRepository.GetStocks(_house);
             Stocks = new  List<Stock>(_allStocks);
         }
+        MessageBoxWindow messageBox = new MessageBoxWindow(new MessageBoxViewModel("Товар удален"));
+         
+        messageBox.Show();
 
 
     }

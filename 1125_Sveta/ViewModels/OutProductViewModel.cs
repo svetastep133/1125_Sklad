@@ -12,6 +12,7 @@ namespace _1125_Sveta.ViewModels;
 public partial class OutProductViewModel : ViewModelBase
 {
     [ObservableProperty] private Stock _selectedStock;
+    private readonly IServiceProvider _serviceProvider;
     private readonly ProductsRepository _productsRepository;
     private readonly StockRepository _stockRepository;
     private readonly CategoryRepository _categoryRepository;
@@ -51,17 +52,16 @@ public partial class OutProductViewModel : ViewModelBase
     [ObservableProperty]
     private string _outgoingItemCost;
 
-    private string _errorMessage;
-    private int _quantityStock;
 
     
     
 
-    public OutProductViewModel(Stock stock,
+    public OutProductViewModel(IServiceProvider serviceProvider,Stock stock,
         ProductsRepository productsRepository, StockRepository stockRepository, OutProductRepository outProductRepository,
         WareHouseRepository warehouseRepository, BuyerRepository buyerRepository, Warehouse currentWarehouse)
     {
         SelectedStock = stock;
+        _serviceProvider = serviceProvider;
         _productsRepository = productsRepository;
         _stockRepository = stockRepository;
 
@@ -70,9 +70,8 @@ public partial class OutProductViewModel : ViewModelBase
         _buyerRepository = buyerRepository;
         SelectedWarehouse = currentWarehouse;
         Warehouses= _warehouseRepository.GetWarehouses();
-       Buyer=_buyerRepository.GetBuyers();
+        Buyer=_buyerRepository.GetBuyers();
         Products = _productsRepository.GetProducts();
-        Quantity=_quantity;
         Stocks = _stockRepository.GetStocks(currentWarehouse);
     }
     
@@ -83,40 +82,36 @@ public partial class OutProductViewModel : ViewModelBase
         _closeAction = action;
     }
 
-    public string ErrorMessage
-    {
-        get => _errorMessage;
-        set { _errorMessage = value; OnPropertyChanged(nameof(ErrorMessage)); }
-    }
+   
 
     [RelayCommand]
     public void SaveOutProduct()
     {
-       Outgoing outgoing = new();
-        outgoing.BuyerId = SelectedBuyer.Id;
-        outgoing.WarehouseId = SelectedWarehouse.Id;
-        outgoing.DocNumber = OutgoingDocNumber;
-        outgoing.Date = DateTime.Now;
-         
-        OutgoingItem outgoingItem = new();
-        outgoingItem.Quantity = int.Parse(OutgoingItemQuantity);
-        int Q = int.Parse(OutgoingItemQuantity);
-        if (Q > SelectedStock.Quantity)
+        try
         {
-            ErrorMessage = "Введенное количество превышает количество товаров на складе";
+            Outgoing outgoing = new();
+            outgoing.BuyerId = SelectedBuyer.Id;
+            outgoing.WarehouseId = SelectedWarehouse.Id;
+            outgoing.DocNumber = OutgoingDocNumber;
+            outgoing.Date = DateTime.Now;
+
+            OutgoingItem outgoingItem = new();
+            outgoingItem.Quantity = int.Parse(OutgoingItemQuantity);
+            outgoingItem.Cost = int.Parse(OutgoingItemCost);
+
+            _outProductRepository.SaveProduct(outgoing, outgoingItem, SelectedStock);
+
+            MessageBoxWindow messageBox = new MessageBoxWindow(new MessageBoxViewModel("Товар успешно отгружен"));
+         
+            messageBox.Show();
+
+            _closeAction?.Invoke();
         }
-        else
+        catch (Exception ex)
         {
-            ErrorMessage = "";
+            MessageBoxWindow messageBox = new MessageBoxWindow(new MessageBoxViewModel(ex.Message));
+         
+            messageBox.Show();
         }
-            
-            
-            
-        outgoingItem.Cost = int.Parse(OutgoingItemCost);
-         
-        
-         
-        _outProductRepository.SaveProduct( outgoing, outgoingItem, SelectedStock);
-        _closeAction?.Invoke();  
     }
 }

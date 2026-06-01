@@ -6,24 +6,24 @@
         mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
         x:Class="_1125_Sveta.Views.NewProductWindow"
         x:DataType="viewModels:NewProductViewModel"
-        Title="NewProductWindow">
-        <Grid RowDefinitions="Auto Auto" HorizontalAlignment="Center" VerticalAlignment="Center">
+        Title="NewProductWindow" Height="500" Width="600" WindowStartupLocation="CenterScreen">
+        <Grid RowDefinitions="Auto Auto" HorizontalAlignment="Center" VerticalAlignment="Center" RowSpacing="10">
                 <StackPanel>
                     <TextBlock  FontWeight="Bold" Text="Выберите существующий товар"/>   
-                    <ComboBox Height="30" Width="309" SelectedItem="{Binding SelectedProduct}" ItemsSource="{Binding Products}"
+                    <ComboBox Height="39" Width="368" SelectedItem="{Binding SelectedProduct}" ItemsSource="{Binding Products}"
                               DisplayMemberBinding="{Binding Name}"/>
                     <TextBlock FontWeight="Bold" Text="Введите номер договора о поставке"/>   
-                        <TextBox Height="30" Width="309"  Text="{Binding IncomingDocNumber}"/>
+                        <TextBox Height="39" Width="368"  Text="{Binding IncomingDocNumber}"/>
                     <TextBlock FontWeight="Bold" Text="Выберите поставщика"/>   
-                        <ComboBox Height="30" Width="309"  SelectedItem="{Binding SelectedSupplier}" ItemsSource="{Binding Suppliers}"
+                        <ComboBox Height="39" Width="368"  SelectedItem="{Binding SelectedSupplier}" ItemsSource="{Binding Suppliers}"
                                   DisplayMemberBinding="{Binding Name}"/>
                     <TextBlock FontWeight="Bold" Text="Введите цену товара"/>   
-                        <TextBox Height="30" Width="309"  Text="{Binding IncomingItemCost}"/>
+                        <TextBox Height="39" Width="368"  Text="{Binding IncomingItemCost}"/>
                     <TextBlock FontWeight="Bold" Text="Введите количество поступивших товаров"/>   
-                        <TextBox Height="30" Width="309" Text="{Binding IncomingItemQuantity}"/>
+                        <TextBox Height="39" Width="368" Text="{Binding IncomingItemQuantity}"/>
                     
                 </StackPanel>
-            <Button Grid.Row="1" Content="Добавить" Command="{Binding SaveProductCommand}"/>
+            <Button Grid.Row="1" HorizontalAlignment="Center" FontWeight="Bold" FontSize="20" Content="Добавить" Command="{Binding SaveProductCommand}"/>
                 
                 
         </Grid>

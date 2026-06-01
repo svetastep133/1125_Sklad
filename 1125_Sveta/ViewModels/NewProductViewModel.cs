@@ -3,13 +3,16 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using _1125_Sveta.Models;
 using _1125_Sveta.Repository;
+using _1125_Sveta.Views;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace _1125_Sveta.ViewModels;
 
 public partial class NewProductViewModel:ViewModelBase
 {
+    private readonly IServiceProvider _serviceProvider;
     private readonly StockRepository _stockRepository;
     private readonly ProductsRepository _productsRepository;
     private readonly CategoryRepository _categoryRepository;
@@ -55,10 +58,11 @@ public partial class NewProductViewModel:ViewModelBase
     [ObservableProperty]
     private string _stockReserved;
     
-    public NewProductViewModel(StockRepository stockRepository,
+    public NewProductViewModel(IServiceProvider serviceProvider,StockRepository stockRepository,
         ProductsRepository productsRepository,CategoryRepository categoryRepository, NewProductRepository newProductRepository, 
         WareHouseRepository warehouseRepository, SuppliersRepository supplierRepository, Warehouse currentWarehouse)
     {
+        _serviceProvider = serviceProvider;
         _stockRepository = stockRepository;
         _productsRepository = productsRepository;
         _categoryRepository = categoryRepository;
@@ -92,7 +96,11 @@ public partial class NewProductViewModel:ViewModelBase
          stock.LastUpdated = DateTime.Now;
          
          _newProductRepository.SaveProduct(SelectedProduct, incoming, incomingItem, stock, SelectedWarehouse, SelectedSupplier);
-         _closeAction?.Invoke();  
+         _closeAction?.Invoke();
+         
+         MessageBoxWindow messageBox = new MessageBoxWindow(new MessageBoxViewModel("Товар успешно добавлен"));
+         
+         messageBox.Show();
      }
     
 }

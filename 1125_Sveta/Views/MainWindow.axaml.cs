@@ -5,10 +5,9 @@ namespace _1125_Sveta.Views;
 
 public partial class MainWindow : Window
 {
-    public MainWindow(MainWindowViewModel vm)
+    public MainWindow()
     {
-        DataContext = vm;
         InitializeComponent();
-        vm.SetWindow(this);
+      
     }
 }

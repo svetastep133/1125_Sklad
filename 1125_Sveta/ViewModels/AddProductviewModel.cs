@@ -55,7 +55,9 @@ public partial class AddProductviewModel: ViewModelBase
         product.CategoryId = SelectedCategory.Id;
         
         _productsRepository.AddProduct(product);
-        
+        MessageBoxWindow messageBox = new MessageBoxWindow(new MessageBoxViewModel("Товар успешно создан"));
+         
+        messageBox.Show();
         _closeAction?.Invoke();  
         
     }

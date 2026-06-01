@@ -20,6 +20,7 @@ public partial class InfStockViewModel: ViewModelBase
     [ObservableProperty] private Product? _selectedProduct;
     [ObservableProperty] List<Product?> _products;
     [ObservableProperty] private Warehouse _selectedWarehouse;
+    [ObservableProperty] List<Product?> _products2;
 
     public InfStockViewModel(IServiceProvider serviceProvider, Stock stock)
     {
@@ -27,6 +28,8 @@ public partial class InfStockViewModel: ViewModelBase
         SelectedStock = stock;
         _infRepository = _serviceProvider.GetService<InfRepository>();
         Products = _infRepository.GetInfInc(stock.ProductId);
+        Products2=_infRepository.GetInfQua(stock.ProductId);
+        
 
     }
     private Action _closeAction;
