@@ -15,6 +15,7 @@ public partial class AddBuyerViewModel:ViewModelBase
     private readonly BuyerRepository _buyerRepository;
     [ObservableProperty] public List<Buyer> _buyers;
     [ObservableProperty] public string _buyerName;
+    [ObservableProperty] public string _buyerEmail;
     private Action _closeAction;
 
     public AddBuyerViewModel(IServiceProvider serviceProvider, BuyerRepository  buyerRepository)
@@ -32,6 +33,7 @@ public partial class AddBuyerViewModel:ViewModelBase
     {
         Buyer buyer=new  Buyer();
         buyer.Name = BuyerName;
+        buyer.Email = BuyerEmail;
         _buyerRepository.AddBuyer(buyer);
         MessageBoxWindow messageBox = new MessageBoxWindow(new MessageBoxViewModel("Покупатель добавлен"));
          

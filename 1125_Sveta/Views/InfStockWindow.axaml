@@ -8,16 +8,16 @@
         x:Class="_1125_Sveta.Views.InfStockWindow"
         x:DataType="viewModels:InfStockViewModel"
         Title="InfProductWindow">
-        <Grid RowDefinitions="Auto Auto Auto * Auto" ColumnDefinitions=" * *" >
+        <Grid RowDefinitions="Auto Auto Auto Auto * Auto" ColumnDefinitions=" * *" >
             <Button FontWeight="Bold" FontSize="20" Width="81" Height="40" HorizontalAlignment="Left" VerticalAlignment="Top"  Command="{Binding BackCommand}" Content="Назад"/>
             <Label Grid.ColumnSpan="2" Grid.Column="" HorizontalAlignment="Center" FontWeight="Bold" FontSize="28" Content="{Binding SelectedStock.ProductsName}"/>
                 <Label Grid.ColumnSpan="2" Grid.Row="1" HorizontalAlignment="Center"  FontSize="22" Content="{Binding SelectedStock.CategoryName}"/>
+            <TextBox  Grid.Row="3" Grid.Column="0" Watermark="Поиск" Text="{Binding SearchText1, UpdateSourceTrigger=PropertyChanged}"/>
                 <TextBlock Grid.Row="2" FontSize="30" HorizontalAlignment="Center" FontWeight="Bold" Text="Поставки" />
-            <ListBox Grid.Row="3" ItemsSource="{Binding Products}" >
+            <ListBox Grid.Row="4" ItemsSource="{Binding Suppliers}" >
                     <ListBox.ItemTemplate>
             <DataTemplate>
                 <StackPanel >
-                    
                     <TextBlock FontSize="18" FontWeight="Bold" Text="{Binding SupplierName, StringFormat={}Поставщик: {0}}"/>
                     <TextBlock FontSize="18" Text="{Binding DocNumber, StringFormat={}Номер договора о поставке: {0}}"/>
                     <TextBlock FontSize="18" Text="{Binding Email, StringFormat={}Электронная почта поставщика: {0}}"/>
@@ -28,14 +28,14 @@
                     <TextBlock FontSize="18" Text="{Binding Date, StringFormat={}Последнее обновление: {0}}"/>
                 </StackPanel>
             </DataTemplate>
-                    </ListBox.ItemTemplate>
+                    </ListBox.ItemTemplate>  
                 </ListBox>
             <TextBlock Grid.Row="2" Grid.Column="1" FontSize="30" HorizontalAlignment="Center"  FontWeight="Bold" Text="Отправления" />
-            <ListBox Grid.Column="1" Grid.Row="3" ItemsSource="{Binding Products2}" >
+            <TextBox  Grid.Row="3" Grid.Column="1" Watermark="Поиск" Text="{Binding SearchText, UpdateSourceTrigger=PropertyChanged}"/>
+            <ListBox Grid.Column="1" Grid.Row="4" ItemsSource="{Binding Buyers}" >
                 <ListBox.ItemTemplate>
                     <DataTemplate>
                         <StackPanel >
-                            
                             <TextBlock FontSize="18" FontWeight="Bold" Text="{Binding BuyerName, StringFormat={}Покупатель: {0}}"/>
                             <TextBlock FontSize="18" Text="{Binding ODocNumber, StringFormat={}Номер договора об отправке: {0}}"/>
                             <TextBlock FontSize="18" Text="{Binding OCost, StringFormat={}Цена: {0}}"/>

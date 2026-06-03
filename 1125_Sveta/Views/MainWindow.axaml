@@ -8,7 +8,7 @@
         x:Class="_1125_Sveta.Views.MainWindow"
         x:DataType="vm:MainWindowViewModel"
         Icon="/Assets/avalonia-logo.ico"
-        Title="_1125_Sveta">
+        Title="_1125_Sveta" >
         <Grid>
      <Grid.RowDefinitions>
              <RowDefinition Height="*"/>
@@ -21,12 +21,17 @@
                                   SelectedItem="{Binding SelectedWarehouse}" 
                                   ItemsSource="{Binding Warehouses}" DisplayMemberBinding="{Binding Name}"/>
                                      <Button  FontWeight="Bold" VerticalAlignment="Center" FontSize="30" Width="150" Height="55" 
-                                             HorizontalAlignment="Center"   Content="Выбрать" Command="{Binding OpenSkladCommand}"/>   
-                </StackPanel>
-             <Button Grid.Row="2" FontWeight="Bold" FontSize="30" Width="245" Height="48" 
-                     HorizontalAlignment="Left" VerticalAlignment="Bottom" Content="Создать товар" Command="{Binding AddProductCommand}"/>
-             <Button Grid.Row="2" FontWeight="Bold" FontSize="30" Width="350" Height="48" 
-                     HorizontalAlignment="Right" VerticalAlignment="Bottom" Command="{Binding OpenBuyerCommand}" Content="Добавить покупателя"/>
+                                             HorizontalAlignment="Center"  Background="#76B8CE" Content="Выбрать" Command="{Binding OpenSkladCommand}"/>   
+                </StackPanel >
+                
+             <StackPanel Grid.Row="2" HorizontalAlignment="Right" VerticalAlignment="Bottom" >
+                      <Button Background="#76B8CE" FontWeight="Bold" FontSize="30" Width="355" Height="48" 
+                                          HorizontalAlignment="Left" VerticalAlignment="Bottom" Content="Список товар" Command="{Binding ProductCommand}"/>
+                     <Button Background="#76B8CE" FontWeight="Bold" FontSize="30" Width="355" Height="48" 
+                             HorizontalAlignment="Right" VerticalAlignment="Bottom" Command="{Binding SupplierCommand}" Content="Список поставщиков"/>
+                     <Button Background="#76B8CE" FontWeight="Bold" FontSize="30" Width="355" Height="48" 
+                             HorizontalAlignment="Right" VerticalAlignment="Bottom" Command="{Binding BuyerCommand}" Content="Список покупателей"/>
+             </StackPanel>
      
         
         </Grid>

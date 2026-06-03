@@ -56,6 +56,15 @@ sealed class Program
                 s.AddTransient<AddBuyerViewModel>();
                 s.AddTransient<MessageBoxViewModel>();
                 s.AddTransient<MessageBoxWindow>();
+                s.AddTransient<AddSupplierWindow>();
+                s.AddTransient<AddSupplierViewModel>();
+                s.AddTransient<ProductViewModel>();
+                s.AddTransient<ProductWindow>();
+                s.AddTransient<BuyerWindow>();
+                s.AddTransient<BuyerViewModel>();
+                s.AddTransient<SupplierWindow>();
+                s.AddTransient<SupplierViewModel>();
+               
 
 
             }).

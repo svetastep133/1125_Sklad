@@ -30,7 +30,7 @@
               <Button   FontWeight="Bold" FontSize="20" Height="40" Width="126" VerticalAlignment="Bottom"  Command="{Binding OutProductCommand}" Content="Отправить"/>
           </StackPanel>
       <StackPanel Grid.Row="4" HorizontalAlignment="Right" Orientation="Vertical">
-      <Button   FontWeight="Bold" FontSize="20"  VerticalAlignment="Bottom"  Command="{Binding InfCommand}" Content="Подробнее о товаре"/>
+      <Button   FontWeight="Bold" FontSize="20"  VerticalAlignment="Bottom"  Command="{Binding InfCommand}" Content="Оборот выбранного товара"/>
       <Button  FontWeight="Bold" FontSize="20" HorizontalAlignment="Right" VerticalAlignment="Bottom"   Command="{Binding DeleteStockCommand}" Content="Удалить"/>
       </StackPanel>
   </Grid>

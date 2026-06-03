@@ -41,25 +41,34 @@ public partial class MainWindowViewModel : ViewModelBase
      
     }
 
+    
     [RelayCommand]
-    public void AddProduct()
-    {
-        var vm = ActivatorUtilities.CreateInstance<AddProductviewModel>(
+    public void Product()
+    {var vm = ActivatorUtilities.CreateInstance<ProductViewModel>(
             _serviceProvider);
-        var win = _serviceProvider.GetRequiredService<AddProductWindow>();
+        var win = _serviceProvider.GetRequiredService<ProductWindow>();
         win.DataContext = vm;
         win.Show();
         
         vm.SetClose(win.Close);
+        
     }
-
-    
-
     [RelayCommand]
-    public void OpenBuyer()
-    {var vm = ActivatorUtilities.CreateInstance<AddBuyerViewModel>(
+    public void Buyer()
+    {var vm = ActivatorUtilities.CreateInstance<BuyerViewModel>(
             _serviceProvider);
-        var win = _serviceProvider.GetRequiredService<AddBuyerWindow>();
+        var win = _serviceProvider.GetRequiredService<BuyerWindow>();
+        win.DataContext = vm;
+        win.Show();
+        
+        vm.SetClose(win.Close);
+        
+    }
+    [RelayCommand]
+    public void Supplier()
+    {var vm = ActivatorUtilities.CreateInstance<SupplierViewModel>(
+            _serviceProvider);
+        var win = _serviceProvider.GetRequiredService<SupplierWindow>();
         win.DataContext = vm;
         win.Show();
         

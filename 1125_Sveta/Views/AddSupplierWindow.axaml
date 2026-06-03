@@ -1,0 +1,19 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:viewModels="clr-namespace:_1125_Sveta.ViewModels"
+        mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+        x:DataType="viewModels:AddSupplierViewModel"
+        x:Class="_1125_Sveta.Views.AddSupplierWindow"
+        Title="AddSupplierWindow" Height="400" Width="500" WindowStartupLocation="CenterScreen">
+    <Grid RowDefinitions="Auto Auto Auto" VerticalAlignment="Center" HorizontalAlignment="Center" RowSpacing="10">
+        <StackPanel Spacing="3" >
+        <TextBlock FontSize="17" FontWeight="Bold" Text="Введите имя поставщика"/>    
+        <TextBox Grid.Row="1" FontSize="23" Height="42" Width="360" Text="{Binding SupplierName}"/>
+        <TextBlock FontSize="17" FontWeight="Bold" Text="Введите электронную почту поставщика"/>    
+        <TextBox Grid.Row="1" FontSize="23" Height="42" Width="360" Text="{Binding SupplierEmail}"/>
+        </StackPanel>
+        <Button Grid.Row="2" FontWeight="Bold" FontSize="24" Height="42" Width="134" HorizontalAlignment="Center" VerticalAlignment="Bottom" Command="{Binding AddSupplierCommand}" Content="Добавить"/>
+    </Grid>
+</Window>

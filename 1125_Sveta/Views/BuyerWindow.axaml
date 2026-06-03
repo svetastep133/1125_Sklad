@@ -1,0 +1,29 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:viewModels="clr-namespace:_1125_Sveta.ViewModels"
+        mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+        x:DataType="viewModels:BuyerViewModel"
+        x:Class="_1125_Sveta.Views.BuyerWindow"
+        Title="BuyerWindow">
+        <Grid RowDefinitions=" Auto Auto * Auto">
+                <Button Grid.Row="0"  FontWeight="Bold" FontSize="20" Width="81" Height="40" HorizontalAlignment="Left" VerticalAlignment="Top" Command="{Binding BackCommand}" Content="Назад" />
+                <TextBox  Grid.Row="1" Watermark="Поиск" Text="{Binding SearchText, UpdateSourceTrigger=PropertyChanged}"/>
+                <ListBox Grid.Row="2"  ItemsSource="{Binding Buyers}" SelectedItem="{Binding SelectedBuyers}">
+                        <ListBox.ItemTemplate>
+                                <DataTemplate>
+                                        <StackPanel>
+                                                <TextBlock FontSize="20" FontWeight="Bold" Text="{Binding Name}" />
+                                                <TextBlock FontSize="18"  Text="{Binding Email}" />
+                                        </StackPanel>
+                                </DataTemplate>
+                        </ListBox.ItemTemplate>
+                </ListBox>
+                <StackPanel Grid.Row="3">
+                        <Button Command="{Binding DeleteCommand}" Content="Удалить"/>
+                        <Button  VerticalAlignment="Bottom" Command="{Binding AddBuyerCommand}" Content="Добавить покупателя"/>
+                </StackPanel>
+            
+        </Grid>
+</Window>
