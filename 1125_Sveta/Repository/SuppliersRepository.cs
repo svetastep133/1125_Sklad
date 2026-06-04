@@ -109,22 +109,35 @@ public class SuppliersRepository
             messageBox.Show();
             connection.Close();
         }
-        
+       
         return false;
         
     }
     
     public bool Update(Supplier supplier)
     {
-        string sql = "update  `Suppliers` set `Name` =@Name, `Email`=@Email where `Id` = " + supplier.Id;
-       
-         var parameters = new MySqlParameter[]
+        
+        string sql="update  `Suppliers` set `Name` =@Name, `Email`=@Email where `Id` = " + supplier.Id;
+        try
         {
-            new MySqlParameter("@Name", supplier.Name), 
-            new MySqlParameter("@Email",  supplier.Email)
+            connection.Open();
+            using (var mc1 = new MySqlCommand(sql, connection))
+            {
+                mc1.Parameters.AddWithValue("@Name", supplier.Name );
+                mc1.Parameters.AddWithValue("@Email", supplier.Email);
+                mc1.ExecuteNonQuery();
+            }
             
-        };
-        return ;
+            connection.Close();
+
+        }
+        catch (Exception e)
+        {
+            Console.WriteLine(e);
+          
+        }
+
+        return true;
 
     }
 

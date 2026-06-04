@@ -24,6 +24,7 @@
              <StackPanel Grid.Row="3">
                  <Button Command="{Binding DeleteCommand}" Content="Удалить"/>
                  <Button  Content="Создать товар" Command="{Binding AddProductCommand}"/>
+                 <Button  Content="Редактировать товар" Command="{Binding EditCommand}"/>
              </StackPanel>
             
         </Grid>

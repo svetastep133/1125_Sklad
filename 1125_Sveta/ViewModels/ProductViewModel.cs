@@ -54,10 +54,24 @@ public partial class ProductViewModel : ViewModelBase
         Products = new List<Product>(_allProducts.Where(s => s.Name.ToLower().Contains(SearchText.ToLower())));
     }
 
+    
     [RelayCommand]
     public void Edit()
     {
+        if (SelectedProduct == null) 
+            return;
         
+        var vm = ActivatorUtilities.CreateInstance<AddProductViewModel>(
+            _serviceProvider,SelectedProduct);
+        var win = _serviceProvider.GetRequiredService<AddProductWindow>();
+        win.DataContext = vm;
+        win.Show();
+        win.Closed += (sender, args) =>
+        {
+            Products = _productsRepository.GetProducts();
+        };
+        
+        vm.SetClose(win.Close);
     }
 
     [RelayCommand]
@@ -83,8 +97,8 @@ public partial class ProductViewModel : ViewModelBase
     [RelayCommand]
     public void AddProduct()
     {
-        var vm = ActivatorUtilities.CreateInstance<AddProductviewModel>(
-            _serviceProvider);
+        var vm = ActivatorUtilities.CreateInstance<AddProductViewModel>(
+            _serviceProvider, new Product());
         var win = _serviceProvider.GetRequiredService<AddProductWindow>();
         win.DataContext = vm;
         win.Show();

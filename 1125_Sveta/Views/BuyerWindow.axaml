@@ -23,6 +23,7 @@
                 <StackPanel Grid.Row="3">
                         <Button Command="{Binding DeleteCommand}" Content="Удалить"/>
                         <Button  VerticalAlignment="Bottom" Command="{Binding AddBuyerCommand}" Content="Добавить покупателя"/>
+                        <Button  VerticalAlignment="Bottom" Command="{Binding EditCommand}" Content="Редактировать покупателя"/>
                 </StackPanel>
             
         </Grid>

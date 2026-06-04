@@ -43,7 +43,7 @@ sealed class Program
                 s.AddTransient<NewProductRepository>();
                 s.AddTransient<SuppliersRepository>();
                 s.AddTransient<AddProductWindow>();
-                s.AddTransient<AddProductviewModel>();
+                s.AddTransient<AddProductViewModel>();
                 s.AddTransient<InfStockWindow>();
                 s.AddTransient<InfStockViewModel>();
                 s.AddTransient<InfRepository>();

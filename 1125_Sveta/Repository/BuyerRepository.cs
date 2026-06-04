@@ -114,4 +114,31 @@ public class BuyerRepository
         
 
     }
+    public bool Update(Buyer buyer)
+    {
+        
+        string sql="update  `Buyer` set `Name` =@Name, `Email`=@Email where `Id` = " + buyer.Id;
+        try
+        {
+            connection.Open();
+            using (var mc1 = new MySqlCommand(sql, connection))
+            {
+                mc1.Parameters.AddWithValue("@Name", buyer.Name );
+                mc1.Parameters.AddWithValue("@Email", buyer.Email);
+                mc1.ExecuteNonQuery();
+            }
+            
+            connection.Close();
+
+        }
+        catch (Exception e)
+        {
+            Console.WriteLine(e);
+          
+        }
+
+        return true;
+
+    }
+
 }

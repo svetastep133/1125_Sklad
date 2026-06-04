@@ -49,6 +49,20 @@ public partial class BuyerViewModel: ViewModelBase
     [RelayCommand]
     public void Edit()
     {
+        if (SelectedBuyers == null) 
+            return;
+        
+        var vm = ActivatorUtilities.CreateInstance<AddBuyerViewModel>(
+            _serviceProvider,SelectedBuyers);
+        var win = _serviceProvider.GetRequiredService<AddBuyerWindow>();
+        win.DataContext = vm;
+        win.Show();
+        win.Closed += (sender, args) =>
+        {
+            Buyers = _repository.GetBuyers();
+        };
+        
+        vm.SetClose(win.Close);
     }
 
     [RelayCommand]
@@ -80,7 +94,7 @@ public partial class BuyerViewModel: ViewModelBase
     [RelayCommand]
     public void AddBuyer()
     {var vm = ActivatorUtilities.CreateInstance<AddBuyerViewModel>(
-            _serviceProvider);
+            _serviceProvider,new Buyer());
         var win = _serviceProvider.GetRequiredService<AddBuyerWindow>();
         win.DataContext = vm;
         win.Show();

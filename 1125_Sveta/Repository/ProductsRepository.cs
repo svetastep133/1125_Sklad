@@ -113,5 +113,32 @@ public class ProductsRepository
         
 
     }
+    public bool Update(Product product)
+    {
+        
+        string sql="update  `Products` set `Name` =@Name, `Weight`=@Weight, `Category_Id` = @Category_Id where `Id` = " + product.Id;
+        try
+        {
+            connection.Open();
+            using (var mc1 = new MySqlCommand(sql, connection))
+            {
+                mc1.Parameters.AddWithValue("@Name", product.Name );
+                mc1.Parameters.AddWithValue("@Weight", product.Weight );
+                mc1.Parameters.AddWithValue("@Category_id", product.CategoryId);
+                mc1.ExecuteNonQuery();
+            }
+            
+            connection.Close();
+
+        }
+        catch (Exception e)
+        {
+            Console.WriteLine(e);
+          
+        }
+
+        return true;
+
+    }
     
 }

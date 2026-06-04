@@ -5,7 +5,7 @@
         xmlns:viewModels="clr-namespace:_1125_Sveta.ViewModels"
         mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
         x:Class="_1125_Sveta.Views.AddProductWindow"
-        x:DataType="viewModels:AddProductviewModel"
+        x:DataType="viewModels:AddProductViewModel"
         Title="AddProductWindow" Height="400" Width="500" WindowStartupLocation="CenterScreen">
         <Grid RowDefinitions="Auto Auto" HorizontalAlignment="Center" VerticalAlignment="Center" RowSpacing="13">
                 <StackPanel Spacing="3">

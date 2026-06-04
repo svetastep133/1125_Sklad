@@ -27,7 +27,8 @@ public partial class AddSupplierViewModel: ViewModelBase
 
         if (_editSupplier.Id != 0)
         {
-            
+            SupplierName= _editSupplier.Name;
+            SupplierEmail= _editSupplier.Email;
             
         }
     }
@@ -39,7 +40,6 @@ public partial class AddSupplierViewModel: ViewModelBase
     [RelayCommand]
     public void AddSupplier()
     {
-       
         _editSupplier.Name = SupplierName;
         _editSupplier.Email = SupplierEmail;
         if (_editSupplier.Id == 0)
@@ -47,13 +47,16 @@ public partial class AddSupplierViewModel: ViewModelBase
             _suppliersRepository.AddSupplier(_editSupplier);
                     MessageBoxWindow messageBox = new MessageBoxWindow(new MessageBoxViewModel("Поставщик добавлен")); 
                     messageBox.Show();
+                   
         }
         else
         {
-            
+            _suppliersRepository.Update(_editSupplier);
+            MessageBoxWindow messageBox = new MessageBoxWindow(new MessageBoxViewModel("Поставщик обновлен")); 
+            messageBox.Show();
+        
         }
-       
-        _closeAction?.Invoke();  
+          _closeAction?.Invoke(); 
 
     }
     

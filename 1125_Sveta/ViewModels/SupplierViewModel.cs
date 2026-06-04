@@ -66,6 +66,12 @@ public partial class SupplierViewModel: ViewModelBase
         var win = _serviceProvider.GetRequiredService<AddSupplierWindow>();
         win.DataContext = vm;
         win.Show();
+        win.Closed += (sender, args) =>
+        {
+            Suppliers = _suppliersRepository.GetSuppliers();
+        };
+        
+        vm.SetClose(win.Close);
     }
 
     [RelayCommand]
