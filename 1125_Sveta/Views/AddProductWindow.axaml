@@ -6,18 +6,18 @@
         mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
         x:Class="_1125_Sveta.Views.AddProductWindow"
         x:DataType="viewModels:AddProductViewModel"
-        Title="AddProductWindow" Height="400" Width="500" WindowStartupLocation="CenterScreen">
+        Title="AddProductWindow" Height="400" Width="500" WindowStartupLocation="CenterScreen" Background="#F5F7FA">
         <Grid RowDefinitions="Auto Auto" HorizontalAlignment="Center" VerticalAlignment="Center" RowSpacing="13">
                 <StackPanel Spacing="3">
                     <TextBlock FontSize="17" FontWeight="Bold" Text="Введите название товара"/>    
-                    <TextBox Height="30" Width="250" Text="{Binding ProductName}"/>
+                    <TextBox Background="White" Height="30" Width="250" Text="{Binding ProductName}"/>
                     <TextBlock FontSize="17" FontWeight="Bold" Text="Введите вес товара (в кг)"/>   
-                        <TextBox Height="30" Width="250" Text="{Binding ProductWeight}"/>
+                        <TextBox Background="White" Height="30" Width="250" Text="{Binding ProductWeight}"/>
                     <TextBlock FontSize="17" FontWeight="Bold" Text="Выберите категорию товара"/>   
-                        <ComboBox Height="30" Width="250" SelectedItem="{Binding SelectedCategory}" ItemsSource="{Binding Categories}" 
+                        <ComboBox Background="White" Height="30" Width="250" SelectedItem="{Binding SelectedCategory}" ItemsSource="{Binding Categories}" 
                                   DisplayMemberBinding="{Binding Name}"/>
                 </StackPanel>
-            <Button Grid.Row="1" HorizontalAlignment="Center"  FontSize="20" FontWeight="Bold"  Content="Добавить" Command="{Binding AddPRoductCommand}"/>
+            <Button Grid.Row="1" Margin="0,10,0,0" Foreground="White" Background="#2563EB" HorizontalAlignment="Center"  FontSize="20" FontWeight="Bold"  Content="Добавить" Command="{Binding AddPRoductCommand}"/>
                 
                 
         </Grid>

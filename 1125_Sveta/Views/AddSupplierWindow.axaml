@@ -6,14 +6,14 @@
         mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
         x:DataType="viewModels:AddSupplierViewModel"
         x:Class="_1125_Sveta.Views.AddSupplierWindow"
-        Title="AddSupplierWindow" Height="400" Width="500" WindowStartupLocation="CenterScreen">
+        Title="AddSupplierWindow" Height="400" Width="500" WindowStartupLocation="CenterScreen" Background="#F5F7FA">
     <Grid RowDefinitions="Auto Auto Auto" VerticalAlignment="Center" HorizontalAlignment="Center" RowSpacing="10">
         <StackPanel Spacing="3" >
         <TextBlock FontSize="17" FontWeight="Bold" Text="Введите имя поставщика"/>    
-        <TextBox Grid.Row="1" FontSize="23" Height="42" Width="360" Text="{Binding SupplierName}"/>
+        <TextBox Background="White" FontSize="23" Height="42" Width="360" Text="{Binding SupplierName}"/>
         <TextBlock FontSize="17" FontWeight="Bold" Text="Введите электронную почту поставщика"/>    
-        <TextBox Grid.Row="1" FontSize="23" Height="42" Width="360" Text="{Binding SupplierEmail}"/>
+        <TextBox Background="White" FontSize="23" Height="42" Width="360" Text="{Binding SupplierEmail}"/>
         </StackPanel>
-        <Button Grid.Row="2" FontWeight="Bold" FontSize="24" Height="42" Width="134" HorizontalAlignment="Center" VerticalAlignment="Bottom" Command="{Binding AddSupplierCommand}" Content="Добавить"/>
+        <Button Grid.Row="2" Margin="0,10,0,0" Foreground="White" Background="#2563EB" FontWeight="Bold" FontSize="24" Height="42" Width="134" HorizontalAlignment="Center" VerticalAlignment="Bottom" Command="{Binding AddSupplierCommand}" Content="Добавить"/>
     </Grid>
 </Window>

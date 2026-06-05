@@ -9,31 +9,157 @@
         x:DataType="vm:MainWindowViewModel"
         Icon="/Assets/avalonia-logo.ico"
         Title="_1125_Sveta" >
-        <Grid>
-     <Grid.RowDefinitions>
-             <RowDefinition Height="*"/>
-             <RowDefinition Height="Auto"/>
-             <RowDefinition Height="*"/>
-     </Grid.RowDefinitions>
-                <StackPanel Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Center" Spacing="10" >
-                        <TextBlock HorizontalAlignment="Center" FontSize="40" Text="Выберите склад"/>
-                        <ComboBox HorizontalAlignment="Center" VerticalAlignment="Center"  FontSize="27" Width="335" Height="57" 
-                                  SelectedItem="{Binding SelectedWarehouse}" 
-                                  ItemsSource="{Binding Warehouses}" DisplayMemberBinding="{Binding Name}"/>
-                                     <Button  FontWeight="Bold" VerticalAlignment="Center" FontSize="30" Width="150" Height="55" 
-                                             HorizontalAlignment="Center"  Background="#76B8CE" Content="Выбрать" Command="{Binding OpenSkladCommand}"/>   
-                </StackPanel >
-                
-             <StackPanel Grid.Row="2" HorizontalAlignment="Right" VerticalAlignment="Bottom" >
-                      <Button Background="#76B8CE" FontWeight="Bold" FontSize="30" Width="355" Height="48" 
-                                          HorizontalAlignment="Left" VerticalAlignment="Bottom" Content="Список товар" Command="{Binding ProductCommand}"/>
-                     <Button Background="#76B8CE" FontWeight="Bold" FontSize="30" Width="355" Height="48" 
-                             HorizontalAlignment="Right" VerticalAlignment="Bottom" Command="{Binding SupplierCommand}" Content="Список поставщиков"/>
-                     <Button Background="#76B8CE" FontWeight="Bold" FontSize="30" Width="355" Height="48" 
-                             HorizontalAlignment="Right" VerticalAlignment="Bottom" Command="{Binding BuyerCommand}" Content="Список покупателей"/>
-             </StackPanel>
-     
+  <Window.Styles>
+
+        <Style Selector="Button.menu">
+            <Setter Property="Background" Value="Transparent"/>
+            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="BorderThickness" Value="0"/>
+            <Setter Property="Padding" Value="15"/>
+            <Setter Property="HorizontalContentAlignment" Value="Left"/>
+            <Setter Property="FontSize" Value="16"/>
+        </Style>
+
+        <Style Selector="Button.card">
+            <Setter Property="Background" Value="White"/>
+            <Setter Property="BorderBrush" Value="#E5E7EB"/>
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="CornerRadius" Value="12"/>
+            <Setter Property="Padding" Value="15"/>
+        </Style>
+
+    </Window.Styles>
+
+    <Grid ColumnDefinitions="300,*">
         
+
+        <Border Grid.Column="0"
+                Background="#2563EB">
+
+            <Grid RowDefinitions="Auto,*">
+
+                <StackPanel Margin="20">
+
+                    <TextBlock Text="📦"
+                               FontSize="40"
+                               HorizontalAlignment="Center"/>
+
+                    <TextBlock Text="Склад"
+                               FontSize="30"
+                               FontWeight="Bold"
+                               Foreground="White"
+                               HorizontalAlignment="Center"/>
+                    
+
+                </StackPanel>
+
+                <StackPanel Grid.Row="1"
+                            Margin="15,30,15,15"
+                            Spacing="10">
+
+                    <Button Classes="menu"
+                            FontSize="23"
+                            FontWeight="Bold"
+                            Content="📦  Товары"
+                            Command="{Binding ProductCommand}"/>
+
+                    <Button Classes="menu"
+                            FontSize="23"
+                            FontWeight="Bold"
+                            Content="🚚  Поставщики"
+                            Command="{Binding SupplierCommand}"/>
+
+                    <Button Classes="menu"
+                            FontSize="23"
+                            FontWeight="Bold"
+                            Content="🧑‍🤝‍🧑  Покупатели"
+                            Command="{Binding BuyerCommand}"/>
+
+                </StackPanel>
+
+            </Grid>
+
+        </Border>
+
+        <Grid Grid.Column="1"
+              Margin="40">
+
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="30"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="30"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+
+
+            <StackPanel Grid.Row="0">
+
+                <TextBlock Text="Складской учет"
+                           FontSize="38"
+                           FontWeight="Bold"
+                           Foreground="#111827"/>
+
+                <TextBlock Text="Управление товарами, поставщиками и покупателями"
+                           FontSize="20"
+                           Foreground="#6B7280"/>
+
+            </StackPanel>
+
+          
+
+            <Border Grid.Row="2"
+                    Background="White"
+                    CornerRadius="16"
+                    Padding="30">
+
+                <Grid ColumnDefinitions="*,Auto"
+                      ColumnSpacing="20">
+
+                    <StackPanel >
+
+                        <TextBlock Text="Рабочий склад"
+                                   FontSize="25"
+                                   FontWeight="SemiBold"/>
+
+                        <TextBlock Text="Выберите склад для работы"
+                                   Margin="0,5,0,15"
+                                   FontSize="19"
+                                   Foreground="#6B7280"/>
+                        
+
+                        <ComboBox Width="450"
+                                  Height="42"
+                                  FontSize="18"
+                                  SelectedItem="{Binding SelectedWarehouse}"
+                                  ItemsSource="{Binding Warehouses}"
+                                  DisplayMemberBinding="{Binding Name}"/>
+                        
+                            <Button 
+                                
+                            Width="191"
+                            Height="44"
+                            Margin="0,10,0,15"
+                            VerticalAlignment="Bottom"
+                            FontWeight="Bold"
+                            FontSize="22"
+                            Background="#2563EB"
+                            Foreground="White"
+                            Content="Открыть склад"
+                            Command="{Binding OpenSkladCommand}"/>
+                        
+                    </StackPanel>
+
+                    
+
+                </Grid>
+
+            </Border>
+            
+
+            </Grid>
+
         </Grid>
-        
+    
+
 </Window>

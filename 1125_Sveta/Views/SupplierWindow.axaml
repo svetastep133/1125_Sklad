@@ -3,28 +3,125 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:viewModels="clr-namespace:_1125_Sveta.ViewModels"
+        WindowState="Maximized"
         mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
         x:DataType="viewModels:SupplierViewModel"
         x:Class="_1125_Sveta.Views.SupplierWindow"
         Title="SupplierWindow">
-        <Grid RowDefinitions="Auto Auto * Auto">
-                <Button Grid.Row="0"   FontWeight="Bold" FontSize="20" Width="81" Height="40" HorizontalAlignment="Left" VerticalAlignment="Top" Command="{Binding BackCommand}" Content="Назад" />
-                <TextBox  Grid.Row="1" Watermark="Поиск" Text="{Binding SearchText, UpdateSourceTrigger=PropertyChanged}"/>
-                <ListBox Grid.Row="2"  ItemsSource="{Binding Suppliers}" SelectedItem="{Binding SelectedSupplier}">
-                        <ListBox.ItemTemplate>
-                                <DataTemplate>
-                                        <StackPanel>
-                                                <TextBlock FontSize="20" FontWeight="Bold" Text="{Binding Name}" />
-                                                <TextBlock FontSize="18"  Text="{Binding Email}" />
-                                        </StackPanel>
-                                </DataTemplate>
-                        </ListBox.ItemTemplate>
-                </ListBox>
-                <StackPanel Grid.Row="3">
-                        <Button Command="{Binding DeleteCommand}" Content="Удалить"/>
-                        <Button Command="{Binding EditCommand}" Content="Редактировать"/>
-                        <Button Command="{Binding AddSupplierCommand}" Content="Добавить поставщика"/>
-                </StackPanel>
-            
-        </Grid>
+        <Grid RowDefinitions="Auto,Auto,*,Auto">
+
+        
+        <Border Grid.Row="0"
+                Background="#2563EB"
+                Padding="20">
+
+            <Grid ColumnDefinitions="Auto,*">
+
+                <Button Grid.Column="0"
+                        Width="105"
+                        Height="40"
+                        Background="#E5E7EB"
+                        FontWeight="Bold"
+                        FontSize="20"
+                        Content="← Назад"
+                        Command="{Binding BackCommand}"/>
+
+                <TextBlock Grid.Column="1"
+                           Text="Поставщики"
+                           FontSize="28"
+                           FontWeight="Bold"
+                           Foreground="White"
+                           HorizontalAlignment="Center"
+                           VerticalAlignment="Center"/>
+
+            </Grid>
+
+        </Border>
+        <Border Grid.Row="1"
+                Margin="20"
+                Padding="15"
+                Background="White"
+                CornerRadius="12">
+
+            <TextBox Watermark="Поиск поставщика..."
+                     Text="{Binding SearchText, UpdateSourceTrigger=PropertyChanged}"/>
+
+        </Border>
+
+        <ListBox Grid.Row="2"
+                 Margin="20,0"
+                 ItemsSource="{Binding Suppliers}"
+                 SelectedItem="{Binding SelectedSupplier}">
+
+            <ListBox.ItemTemplate>
+
+                <DataTemplate>
+
+                    <Border Margin="0,0,0,12"
+                            Padding="18"
+                            Background="White"
+                            CornerRadius="12">
+
+                        <Grid RowDefinitions="Auto,Auto">
+
+                            <TextBlock FontSize="20"
+                                       FontWeight="Bold"
+                                       Text="{Binding Name}"/>
+
+                            <TextBlock Grid.Row="1"
+                                       Margin="0,8,0,0"
+                                       FontSize="16"
+                                       Foreground="#6B7280"
+                                       Text="{Binding Email}"/>
+
+                        </Grid>
+
+                    </Border>
+
+                </DataTemplate>
+
+            </ListBox.ItemTemplate>
+
+        </ListBox>
+
+        <Border Grid.Row="3"
+                Background="White"
+                Padding="20">
+
+            <Grid ColumnDefinitions="*,*,*"
+                  ColumnSpacing="15">
+
+                <Button Grid.Column="0"
+                        Height="45"
+                        Margin="190,0,0,0"
+                        FontSize="22"
+                        FontWeight="Bold"
+                        Foreground="White" Background="#2563EB"
+                        Content="Добавить поставщика"
+                        Command="{Binding AddSupplierCommand}"/>
+
+                <Button Grid.Column="1"
+                        Height="45"
+                        FontSize="22"
+                        Foreground="White" Background="#2563EB"
+                        Margin="110,0,0,0"
+                        FontWeight="Bold"
+                        Content="Редактировать"
+                        Command="{Binding EditCommand}"/>
+
+                <Button Grid.Column="2"
+                        Height="45"
+                        Foreground="White" Background="#2563EB"
+                        FontSize="22"
+                        Margin="0,0,50,0"
+                        FontWeight="Bold"
+                        Content="Удалить"
+                        Command="{Binding DeleteCommand}"/>
+
+            </Grid>
+
+        </Border>
+
+    </Grid>
+
 </Window>
