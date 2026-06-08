@@ -30,9 +30,6 @@ public partial class OutProductViewModel : ViewModelBase
     private Buyer _selectedBuyer;
     [ObservableProperty]
     private List<Buyer> _buyer;
-    
-    [ObservableProperty]
-    private Stock _quantity;
 
     [ObservableProperty]
     private Warehouse _selectedWarehouse;

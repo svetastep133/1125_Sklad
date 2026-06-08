@@ -14,9 +14,7 @@ public class OutProductRepository
     }
      public void SaveProduct(Outgoing outgoing, OutgoingItem outgoingItem, Stock stock )
     {
-        // добавить запрос на проверку наличия указанного товара в указанном количестве на указанном складе       
-            // если FALSE , то прерываемся, пишем ошибку - не хватает товара
-            string checkSql = @"SELECT Quantity FROM Stock WHERE Product_id = @Product_id AND Warehouse_id = @Warehouse_id";    
+        string checkSql = @"SELECT Quantity FROM Stock WHERE Product_id = @Product_id AND Warehouse_id = @Warehouse_id";    
         string sql2 = "insert into Outgoing values (0, @Doc_number, @Warehouse_id, @Date,@Buyer_id)";
         string sql3 = "insert into Outgoing_items (`id`, `Outgoing_id`, `Product_id`, `Cost`, `Quantity`) values (0, @Outgoing_id, @Product_id, @Cost, @Quantity)";
         string sql4 ="insert INTO  Stock Values (@Product_id, @Warehouse_id, @Quantity, CURRENT_TIMESTAMP()) on DUPLICATE KEY UPDATE `Quantity` = `Quantity`- @Quantity, Last_updated = CURRENT_TIMESTAMP()";

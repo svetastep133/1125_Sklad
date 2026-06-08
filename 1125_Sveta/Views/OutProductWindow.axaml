@@ -11,15 +11,15 @@
                 <StackPanel  Spacing="5">
                         
                         <TextBlock FontWeight="Bold" Text="Введите номер договора об отправке"/>   
-                        <TextBox Background="White" Height="39" Width="368"  Text="{Binding OutgoingDocNumber}"/>
+                        <TextBox Background="White" FontSize="20" Height="39" Width="368"  Text="{Binding OutgoingDocNumber}"/>
                         <TextBlock FontWeight="Bold" Text="Выберите получателя"/>   
-                        <ComboBox Background="White" Height="39" Width="368"  SelectedItem="{Binding SelectedBuyer}" ItemsSource="{Binding Buyer}"
+                        <ComboBox Background="White" FontSize="20" Height="39" Width="368"  SelectedItem="{Binding SelectedBuyer}" ItemsSource="{Binding Buyer}"
                                   DisplayMemberBinding="{Binding Name}"/>
                         <TextBlock FontWeight="Bold" Text="Введите цену товара"/>   
-                        <TextBox Background="White" Height="39" Width="368"  Text="{Binding OutgoingItemCost}"/>
+                        <TextBox Background="White" FontSize="20" Height="39" Width="368"  Text="{Binding OutgoingItemCost}"/>
                        
                         <TextBlock FontWeight="Bold" Text="Введите количество отправляемых товаров"/>   
-                        <TextBox Background="White" Height="39" Width="368" Text="{Binding OutgoingItemQuantity}"/>
+                        <TextBox Background="White" FontSize="20" Height="39" Width="368" Text="{Binding OutgoingItemQuantity}"/>
                     
                 </StackPanel>
                 <Button Grid.Row="1" FontSize="20" Background="#2563EB"

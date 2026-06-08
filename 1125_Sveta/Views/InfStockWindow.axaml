@@ -76,7 +76,7 @@
 
             <Grid RowDefinitions="Auto,*">
 
-                <TextBox Watermark="Поиск поставки..."
+                <TextBox Watermark="Поиск поставки по поставщику..."
                          Text="{Binding SearchText1}"/>
 
                 <ListBox Grid.Row="1"
@@ -134,7 +134,7 @@
 
             <Grid RowDefinitions="Auto,*">
 
-                <TextBox Watermark="Поиск отправления..."
+                <TextBox Watermark="Поиск отправления по покупателю..."
                          Text="{Binding SearchText}"/>
 
                 <ListBox Grid.Row="1"

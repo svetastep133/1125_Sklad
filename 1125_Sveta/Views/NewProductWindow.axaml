@@ -10,17 +10,17 @@
         <Grid RowDefinitions="Auto Auto" HorizontalAlignment="Center" VerticalAlignment="Center" RowSpacing="10">
                 <StackPanel>
                     <TextBlock  FontWeight="Bold" Text="Выберите существующий товар"/>   
-                    <ComboBox Background="White" Height="39" Width="368" SelectedItem="{Binding SelectedProduct}" ItemsSource="{Binding Products}"
+                    <ComboBox Background="White" FontSize="20" Height="39" Width="368" SelectedItem="{Binding SelectedProduct}" ItemsSource="{Binding Products}"
                               DisplayMemberBinding="{Binding Name}"/>
                     <TextBlock FontWeight="Bold" Text="Введите номер договора о поставке"/>   
-                        <TextBox Background="White" Height="39" Width="368"  Text="{Binding IncomingDocNumber}"/>
+                        <TextBox Background="White" FontSize="20" Height="39" Width="368"  Text="{Binding IncomingDocNumber}"/>
                     <TextBlock FontWeight="Bold" Text="Выберите поставщика"/>   
-                        <ComboBox Background="White" Height="39" Width="368"  SelectedItem="{Binding SelectedSupplier}" ItemsSource="{Binding Suppliers}"
+                        <ComboBox Background="White" Height="39" Width="368" FontSize="20"  SelectedItem="{Binding SelectedSupplier}" ItemsSource="{Binding Suppliers}"
                                   DisplayMemberBinding="{Binding Name}"/>
                     <TextBlock FontWeight="Bold" Text="Введите цену товара"/>   
-                        <TextBox Background="White" Height="39" Width="368"  Text="{Binding IncomingItemCost}"/>
+                        <TextBox Background="White" Height="39" Width="368" FontSize="20" Text="{Binding IncomingItemCost}"/>
                     <TextBlock FontWeight="Bold" Text="Введите количество поступивших товаров"/>   
-                        <TextBox Background="White" Height="39" Width="368" Text="{Binding IncomingItemQuantity}"/>
+                        <TextBox Background="White" Height="39" Width="368" FontSize="20" Text="{Binding IncomingItemQuantity}"/>
                     
                 </StackPanel>
             <Button Grid.Row="1" Background="#2563EB"

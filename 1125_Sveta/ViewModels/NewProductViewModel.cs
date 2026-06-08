@@ -55,9 +55,6 @@ public partial class NewProductViewModel:ViewModelBase
     private string _incomingItemCost;
     
   
-    [ObservableProperty]
-    private string _stockReserved;
-    
     public NewProductViewModel(IServiceProvider serviceProvider,StockRepository stockRepository,
         ProductsRepository productsRepository,CategoryRepository categoryRepository, NewProductRepository newProductRepository, 
         WareHouseRepository warehouseRepository, SuppliersRepository supplierRepository, Warehouse currentWarehouse)
